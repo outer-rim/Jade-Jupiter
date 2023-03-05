@@ -75,7 +75,7 @@ export const ProfileCardWidget = (props) => {
           className="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4"
         />
         <Card.Title>{props.profile.name}</Card.Title>
-        <Card.Text className="text-gray mb-4">Front Desk Operator</Card.Text>
+        <Card.Text className="text-gray mb-4">{props.role}</Card.Text>
       </Card.Body>
     </Card>
   );
@@ -96,9 +96,11 @@ export const ProfileDetailsWidget = (props) => {
         <Card.Subtitle className="text-gray mb-4">
           {props.profile.address}
         </Card.Subtitle>
-        <Card.Subtitle className="text-gray mb-4">
-          Phone: {props.profile.phone}
-        </Card.Subtitle>
+        {props.role === "admin" && (
+          <Card.Subtitle className="text-gray mb-4">
+            Phone: {props.profile.phone}
+          </Card.Subtitle>
+        )}
       </Card.Body>
     </Card>
   );
@@ -357,9 +359,13 @@ export const MedicationList = () => {
   };
 
   return (
-    <Card border="light" className="shadow-sm" style={{overflowY: "scroll", height:"60vh"}}>
-    <br/>
-    <h2 className = "text-center" > Medicines List </h2>
+    <Card
+      border="light"
+      className="shadow-sm"
+      style={{ overflowY: "scroll", height: "60vh" }}
+    >
+      <br />
+      <h2 className="text-center"> Medicines List </h2>
       <Card.Body className="pb-0">
         <Table responsive className="table-centered table-nowrap rounded mb-0">
           <thead className="thead-light">
@@ -434,29 +440,19 @@ export const PatientTable = () => {
   );
 };
 
-export const DoctorTable = () => {
+export const DoctorTable = (props) => {
+  const { doctorList } = props;
   const TableRow = (props) => {
-    const {
-      country,
-      countryImage,
-      overallRank,
-      overallRankChange,
-      travelRank,
-      travelRankChange,
-      widgetsRank,
-      widgetsRankChange,
-    } = props;
-
     return (
       <tr>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{props.id}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
-        <td className="fw-bold border-0">{travelRank ? travelRank : "-"}</td>
-        <td className="fw-bold border-0">{widgetsRank ? widgetsRank : "-"}</td>
+        <td className="fw-bold border-0">{props.name}</td>
+        <td className="fw-bold border-0">{props.specialization}</td>
+        <td className="fw-bold border-0">{props.position}</td>
       </tr>
     );
   };
@@ -480,7 +476,7 @@ export const DoctorTable = () => {
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map((r) => (
+            {doctorList.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>
@@ -818,30 +814,45 @@ export const SlotTable = () => {
 
 export const SlotTableDoc = () => {
   const TableRow = (props) => {
-    const { country, countryImage, overallRank, overallRankChange, travelRank, travelRankChange, widgetsRank, widgetsRankChange } = props;
+    const {
+      country,
+      countryImage,
+      overallRank,
+      overallRankChange,
+      travelRank,
+      travelRankChange,
+      widgetsRank,
+      widgetsRankChange,
+    } = props;
 
     return (
       <tr>
         <td className="border-0">
-            <div><span className="h6">123</span></div>
+          <div>
+            <span className="h6">123</span>
+          </div>
         </td>
         <td className="border-0">
-            <div><span className="h6">{country}</span></div>
+          <div>
+            <span className="h6">{country}</span>
+          </div>
         </td>
+        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
         <td className="fw-bold border-0">
-          {overallRank ? overallRank : "-"}
-        </td>
-        <td className="fw-bold border-0">
-          {overallRank%2 ? "Booked" : "Available"}
+          {overallRank % 2 ? "Booked" : "Available"}
         </td>
       </tr>
     );
   };
 
   return (
-    <Card border="light" className="shadow-sm" style={{overflowY: "scroll", height:"42.5vh"}}>
-      <br/>
-    <h5 className = "text-center" > Available Slots </h5>
+    <Card
+      border="light"
+      className="shadow-sm"
+      style={{ overflowY: "scroll", height: "42.5vh" }}
+    >
+      <br />
+      <h5 className="text-center"> Available Slots </h5>
       <Card.Body className="pb-0">
         <Table responsive className="table-centered table-nowrap rounded mb-0">
           <thead className="thead-light">
@@ -853,7 +864,9 @@ export const SlotTableDoc = () => {
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map(r => <TableRow key={`ranking-${r.id}`} {...r} />)}
+            {pageRanking.map((r) => (
+              <TableRow key={`ranking-${r.id}`} {...r} />
+            ))}
           </tbody>
         </Table>
       </Card.Body>
