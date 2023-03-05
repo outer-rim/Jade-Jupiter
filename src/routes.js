@@ -21,6 +21,7 @@ export const Routes = {
   Doctors: {
     path: "/dashboard/doctor_list",
     path2: "/dashboardadmin/doctor_list",
+    path3: "/dashboard2/doctor_list"
   },
   Op_add: { path: "/dashboardadmin/op_add" },
   Op_show: { path: "/dashboardadmin/op_show" },

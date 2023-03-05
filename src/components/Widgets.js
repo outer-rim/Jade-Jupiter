@@ -486,28 +486,18 @@ export const DoctorTable = (props) => {
   );
 };
 
-export const OperatorTable = () => {
+export const OperatorTable = (props) => {
+  const { operatorList } = props;
   const TableRow = (props) => {
-    const {
-      country,
-      countryImage,
-      overallRank,
-      overallRankChange,
-      travelRank,
-      travelRankChange,
-      widgetsRank,
-      widgetsRankChange,
-    } = props;
-
     return (
       <tr>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{props.id}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
-        <td className="fw-bold border-0">{travelRank ? travelRank : "-"}</td>
+        <td className="fw-bold border-0">{props.name}</td>
+        <td className="fw-bold border-0">{props.role}</td>
       </tr>
     );
   };
@@ -530,7 +520,7 @@ export const OperatorTable = () => {
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map((r) => (
+            {operatorList.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>

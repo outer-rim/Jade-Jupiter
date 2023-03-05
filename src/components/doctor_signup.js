@@ -65,7 +65,7 @@ export const DocsignUp = (props) => {
                   required
                   type="text"
                   placeholder="Enter your first name"
-                  value={name}
+                  defaultValue={props.doctor.name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </Form.Group>
@@ -80,7 +80,7 @@ export const DocsignUp = (props) => {
                   required
                   type="number"
                   placeholder="35"
-                  value={id}
+                  defaultValue={props.doctor.id}
                   onChange={(e) => setId(e.target.value)}
                 />
               </Form.Group>
@@ -93,7 +93,7 @@ export const DocsignUp = (props) => {
                 <Form.Control
                   required
                   type="password"
-                  value={password}
+                  defaultValue={props.doctor.password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
@@ -105,7 +105,7 @@ export const DocsignUp = (props) => {
                   required
                   type="email"
                   placeholder="abc@abc.com"
-                  value={email}
+                  defaultValue={props.doctor.email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Group>
@@ -117,7 +117,7 @@ export const DocsignUp = (props) => {
                   required
                   type="number"
                   placeholder="+91 12345 67890"
-                  value={phone}
+                  defaultValue={props.doctor.phone}
                   onChange={(e) => setPhone(e.target.value)}
                 />
               </Form.Group>
@@ -131,7 +131,7 @@ export const DocsignUp = (props) => {
                 <Form.Control
                   required
                   type="text"
-                  value={licence}
+                  defaultValue={props.doctor.licence}
                   onChange={(e) => setLicence(e.target.value)}
                 />
               </Form.Group>
@@ -142,7 +142,7 @@ export const DocsignUp = (props) => {
                 <Form.Control
                   required
                   type="text"
-                  value={specialization}
+                  defaultValue={props.doctor.specialization}
                   onChange={(e) => setSpecialization(e.target.value)}
                 />
               </Form.Group>
@@ -153,7 +153,7 @@ export const DocsignUp = (props) => {
                 <Form.Control
                   required
                   type="text"
-                  value={position}
+                  defaultValue={props.doctor.position}
                   onChange={(e) => setPosition(e.target.value)}
                 />
               </Form.Group>
@@ -170,7 +170,7 @@ export const DocsignUp = (props) => {
                   required
                   type="text"
                   placeholder="Enter address of the Doctor"
-                  value={address}
+                  defaultValue={props.doctor.address}
                   onChange={(e) => setAddress(e.target.value)}
                 />
               </Form.Group>

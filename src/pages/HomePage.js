@@ -317,6 +317,7 @@ export default () => (
       path={Routes.DashboardOverview.path4}
       component={DashboardOverview}
     />
+    <RouteWithSidebarData exact path={Routes.Doctors.path3} component={Doctors} />
     <RouteWithSidebarData
       exact
       path={Routes.Dashboards.path4}

@@ -235,6 +235,8 @@ export default (props = {}) => {
                 link={Routes.MedicineShow.path2}
               />
 
+              <NavItem title="Doctors List" icon={faChartPie} link={Routes.Doctors.path3} />
+              <NavItem title="Patients List" icon={faChartPie} link={Routes.Doctors.path3} />
               <Button
                 as={Link}
                 onClick={handleSignOut}

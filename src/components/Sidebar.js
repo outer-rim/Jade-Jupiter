@@ -183,45 +183,6 @@ export default (props = {}) => {
               </Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              {!show && (
-                <NavItem
-                  title="Global Hospitals"
-                  size="20px"
-                  type="bold"
-                  image={ReactHero}
-                />
-              )}
-              <Dropdown.Divider className="my-3 border-indigo" />
-              <NavItem
-                title="Your Profile"
-                link={Routes.DashboardOverview.path}
-                icon={faChartPie}
-              />
-              <NavItem
-                title="Patient Discharge"
-                icon={faChartPie}
-                link={Routes.Transactions.path}
-              />
-              <NavItem
-                title="Patient Info"
-                icon={faChartPie}
-                link={Routes.Settings.path}
-              />
-              <NavItem
-                title="Patient Admission"
-                icon={faChartPie}
-                link={Routes.FDAdmit.path}
-              />
-              <NavItem
-                title="Manage Appointments"
-                icon={faChartPie}
-                link={Routes.FDAppoint.path}
-              />
-              <NavItem
-                title="Doctors List"
-                icon={faChartPie}
-                link={Routes.Doctors.path}
-              />
               <NavItem title="Your Profile" link={Routes.DashboardOverview.path} icon={faChartPie} />
               <NavItem title="Patient Discharge" icon={faChartPie} link={Routes.Transactions.path} />
               <NavItem title="Patient Info" icon={faChartPie} link={Routes.Settings.path} />
