@@ -32,7 +32,6 @@ import axios from "axios";
 export default () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -43,12 +42,31 @@ export default () => {
       })
       .then((response) => {
         localStorage.setItem("token", JSON.stringify(response.data.token));
-        window.location.assign(`${FRONTEND_URL}/dashboard`);
+        localStorage.setItem("role", JSON.stringify(response.data.role));
+        localStorage.setItem("profile", JSON.stringify(response.data.user));
+        switch (response.data.role) {
+          case "admin":
+            window.location.assign(`${FRONTEND_URL}/dashboardadmin`);
+            break;
+          case "data_entry":
+            window.location.assign(`${FRONTEND_URL}/dashboard2`);
+            break;
+          case "front_desk":
+            window.location.assign(`${FRONTEND_URL}/dashboard`);
+            break;
+          case "doctor":
+            window.location.assign(`${FRONTEND_URL}/dashboarddoctor`);
+            break;
+          default:
+            window.location.assign(`${FRONTEND_URL}/`);
+        }
       })
       .catch((err) => {
         console.log(err);
         if (err.response.status === 401) {
-          window.alert("Credentials inavlid");
+          window.alert("Credentials invalid");
+        } else if (err.response.status === 404) {
+          window.alert("User not found");
         } else {
           window.alert("Server error");
         }
@@ -57,7 +75,7 @@ export default () => {
   return (
     <main>
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
-        <Container style={{ backgroundImage: `url(${BgImage})`}}>
+        <Container style={{ backgroundImage: `url(${BgImage})` }}>
           <p className="text-center">
             <Card.Link
               as={Link}
@@ -68,9 +86,7 @@ export default () => {
               homepage
             </Card.Link>
           </p>
-          <Row
-            className="justify-content-center form-bg-image"
-          >
+          <Row className="justify-content-center form-bg-image">
             <Col
               xs={12}
               className="d-flex align-items-center justify-content-center"
@@ -117,7 +133,7 @@ export default () => {
                     Sign in
                   </Button>
                 </Form>
-                <br/>
+                <br />
                 <br />
                 <br />
               </div>
