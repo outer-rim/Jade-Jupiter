@@ -357,8 +357,6 @@ export const MedicationList = () => {
   };
 
   return (
-    <>
-      <h5 className="text-center"> Medicines List </h5>
     <Card border="light" className="shadow-sm" style={{overflowY: "scroll", height:"60vh"}}>
     <br/>
     <h2 className = "text-center" > Medicines List </h2>
@@ -381,7 +379,6 @@ export const MedicationList = () => {
         </Table>
       </Card.Body>
     </Card>
-    </>
   );
 };
 
