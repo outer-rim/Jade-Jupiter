@@ -99,6 +99,7 @@ export default (props = {}) => {
               <NavItem title="Patient Query" icon={faCog} link={Routes.PQuery.path} />
               <NavItem title="Add Medications" icon={faChartPie} link={Routes.DocMedication.path} />
               <NavItem title="Add Treatments" icon={faChartPie} link={Routes.DocTreatment.path} />
+              <NavItem title="Add Slots" icon={faChartPie} link={Routes.Doc_Slot.path} />
               <Dropdown.Divider className="my-3 border-indigo" />
               <NavItem title="Treatm.. & Appoint.." icon={faCog} link={Routes.PatientShow.path2} />
               <NavItem title="Show Medicines" icon={faCog} link={Routes.MedicineShow.path} />

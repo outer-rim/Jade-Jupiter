@@ -357,13 +357,10 @@ export const MedicationList = () => {
   };
 
   return (
-    <Card
-      border="light"
-      className="shadow-sm"
-      style={{ overflowY: "scroll", height: "60vh" }}
-    >
-      <br />
       <h5 className="text-center"> Medicines List </h5>
+    <Card border="light" className="shadow-sm" style={{overflowY: "scroll", height:"60vh"}}>
+    <br/>
+    <h2 className = "text-center" > Medicines List </h2>
       <Card.Body className="pb-0">
         <Table responsive className="table-centered table-nowrap rounded mb-0">
           <thead className="thead-light">
@@ -813,6 +810,51 @@ export const SlotTable = () => {
             {pageRanking.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
+          </tbody>
+        </Table>
+      </Card.Body>
+    </Card>
+  );
+};
+
+export const SlotTableDoc = () => {
+  const TableRow = (props) => {
+    const { country, countryImage, overallRank, overallRankChange, travelRank, travelRankChange, widgetsRank, widgetsRankChange } = props;
+
+    return (
+      <tr>
+        <td className="border-0">
+            <div><span className="h6">123</span></div>
+        </td>
+        <td className="border-0">
+            <div><span className="h6">{country}</span></div>
+        </td>
+        <td className="fw-bold border-0">
+          {overallRank ? overallRank : "-"}
+        </td>
+        <td className="fw-bold border-0">
+          {overallRank%2 ? "Booked" : "Available"}
+        </td>
+      </tr>
+    );
+  };
+
+  return (
+    <Card border="light" className="shadow-sm" style={{overflowY: "scroll", height:"42.5vh"}}>
+      <br/>
+    <h5 className = "text-center" > Available Slots </h5>
+      <Card.Body className="pb-0">
+        <Table responsive className="table-centered table-nowrap rounded mb-0">
+          <thead className="thead-light">
+            <tr>
+              <th className="border-0">Slot ID</th>
+              <th className="border-0">Start Time</th>
+              <th className="border-0">End Time</th>
+              <th className="border-0">Booking Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pageRanking.map(r => <TableRow key={`ranking-${r.id}`} {...r} />)}
           </tbody>
         </Table>
       </Card.Body>

@@ -97,11 +97,11 @@ export default (props = {}) => {
               <Dropdown.Divider className="my-3 border-indigo" />
               <NavItem title="Your Profile" link={Routes.DashboardOverview.path2} icon={faChartPie} />
               <NavItem title="Add Operator" icon={faChartPie} link={Routes.Op_add.path} />
-              <NavItem title="Show Operator" icon={faCog} link={Routes.Op_show.path} />
+              <NavItem title="Show Operator" icon={faChartPie} link={Routes.Op_show.path} />
               <NavItem title="Add Doctor" icon={faChartPie} link={Routes.Doc_add.path} />
-              <NavItem title="Show Doctor" icon={faCog} link={Routes.Doc_show.path} />
+              <NavItem title="Show Doctor" icon={faChartPie} link={Routes.Doc_show.path} />
               <Dropdown.Divider className="my-3 border-indigo" />
-              <NavItem title="Delete Stakeholders" icon={faHandHoldingUsd} link={Routes.Usr_del.path} />
+              <NavItem title="Delete Stakeholders" icon={faChartPie} link={Routes.Usr_del.path} />
 
               {/* <CollapsableNavItem eventKey="tables/" title="Tables" icon={faTable}>
                 <NavItem title="Bootstrap Table" link={Routes.BootstrapTables.path} />
