@@ -39,6 +39,13 @@ import { DocsignUp } from '../components/doctor_signup';
 import Admin_Doc_add from './Admin_Doc_add';
 import Admin_del from './Admin_del';
 import Admin_Op_add from './Admin_Op_add';
+import Doc_Slot from './Doc_Slot';
+import operators from './operators';
+import { MedicationList } from '../components/Widgets';
+import room_block from './room_block';
+import Procedures from './Procedures';
+import  { DocAddSlot } from "../components/Doc_add_slot";
+// import Doc_Slot_add from '../Doc_Slot_Add';
 
 
 // documentation pages
@@ -72,10 +79,7 @@ import Tables from "./components/Tables";
 import Tabs from "./components/Tabs";
 import Tooltips from "./components/Tooltips";
 import Toasts from "./components/Toasts";
-import operators from './operators';
-import { MedicationList } from '../components/Widgets';
-import room_block from './room_block';
-import Procedures from './Procedures';
+
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -246,6 +250,7 @@ export default () => (
     <RouteWithSidebarDoc exact path={Routes.DashboardOverview.path3} component={DashboardOverview} />
     <RouteWithSidebarDoc exact path={Routes.Dashboards.path3} component={DashboardOverview} />
     <RouteWithSidebarDoc exact path={Routes.PatientShow.path2} component={Doc_Patient_List} />
+    <RouteWithSidebarDoc exact path={Routes.Doc_Slot.path} component= {Doc_Slot}/>
     <RouteWithSidebarDoc exact path={Routes.PQuery.path} component={Doc_Patient_Query} /> 
     <RouteWithSidebarDoc exact path={Routes.MedicineShow.path} component={MedicationList} /> 
     <RouteWithSidebarDoc exact path={Routes.DocMedication.path} component={DocMedication} />

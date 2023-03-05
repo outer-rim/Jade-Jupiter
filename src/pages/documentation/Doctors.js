@@ -67,7 +67,7 @@ class UserCards extends Component {
 
   render(){
     return (
-      <div className="clearfix">
+      <div className="clearfix container">
         <div xs={12} className="text-center d-flex align-items-center justify-content-center">
                <h1>Our Doctors</h1>
         </div>
@@ -111,6 +111,7 @@ class UserCards extends Component {
         >
           Load More Users
         </button>
+        <br />
       </div>
     );
   }

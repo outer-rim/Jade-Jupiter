@@ -20,6 +20,7 @@ import ReactMockupImg from "../assets/img/hosp/BeFunky-collage.png";
 import BS5IllustrationsImg from "../assets/img/illustrations/bs5-illustrations.svg";
 import BS5Logo from "../assets/img/technologies/bootstrap-5-logo.svg";
 import ReactLogo from "../assets/img/technologies/react-logo.svg";
+import DocsBuild from "./documentation/Doctors";
 
 import pages from "../data/pages";
 import features from "../data/features";
