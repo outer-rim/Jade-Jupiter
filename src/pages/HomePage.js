@@ -442,14 +442,14 @@ export default () => (
     <RouteWithSidebar exact path={Routes.Toasts.path} component={Toasts} />
 
     {/* documentation */}
-    <RouteWithSidebar exact path={Routes.AboutUs.path} component={AboutUs} />
-    <RouteWithSidebar
+    <RouteWithLoader exact path={Routes.AboutUs.path} component={AboutUs} />
+    <RouteWithLoader
       exact
       path={Routes.ContactUs.path}
       component={ContactUs}
     />
-    <RouteWithSidebar exact path={Routes.History.path} component={History} />
-    <RouteWithSidebar exact path={Routes.Vision.path} component={Vision} />
+    <RouteWithLoader exact path={Routes.History.path} component={History} />
+    <RouteWithLoader exact path={Routes.Vision.path} component={Vision} />
     <RouteWithSidebar
       exact
       path={Routes.DocsFolderStructure.path}
