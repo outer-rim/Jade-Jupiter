@@ -1,20 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { BACKEND_URL } from "../constants.js";
+import AugmentedAxios from "../utils/augmentedAxios";
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-import { Col, Row, Card, Form, Button, InputGroup } from '@themesberg/react-bootstrap';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  Col,
+  Row,
+  Card,
+  Form,
+  Button,
+  InputGroup,
+} from "@themesberg/react-bootstrap";
 
-
-export const DocsignUp = () => {
-  const [birthday, setBirthday] = useState("");
+export const DocsignUp = (props) => {
+  const [id, setId] = useState(0);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  console.log(name);
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [licence, setLicence] = useState("");
+  const [specialization, setSpecialization] = useState("");
+  const [position, setPosition] = useState("");
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    AugmentedAxios.post(`${BACKEND_URL}/doctor/register`, {
+      email: email,
+      password: password,
+      name: name,
+      address: address,
+      phone: phone,
+      license: licence,
+      specialization: specialization,
+      position: position,
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          window.alert("Doctor Registered Successfully");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("I am called");
-  }
+  };
 
   return (
     <Card border="light" className="bg-white shadow-sm mb-4">
@@ -22,17 +58,31 @@ export const DocsignUp = () => {
         <h5 className="mb-4">Doctor Registration</h5>
         <Form>
           <Row>
-          <Col md={8} className="mb-3">
+            <Col md={8} className="mb-3">
               <Form.Group id="firstName">
                 <Form.Label>Doctor Name</Form.Label>
-                <Form.Control required type="text" placeholder="Enter your first name" onChange={(e) => setName(e.target.value)} />
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Enter your first name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">
               <Form.Group id="age">
                 <Form.Label>Doctor ID</Form.Label>
-                <small style={{color: "red", fontWeight: "bold"}}>&nbsp;(Ignore For New Registrations)</small>
-                <Form.Control required type="number" placeholder="35" />
+                <small style={{ color: "red", fontWeight: "bold" }}>
+                  &nbsp;(Ignore For New Registrations)
+                </small>
+                <Form.Control
+                  required
+                  type="number"
+                  placeholder="35"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                />
               </Form.Group>
             </Col>
           </Row>
@@ -40,40 +90,72 @@ export const DocsignUp = () => {
             <Col md={4} className="mb-3">
               <Form.Group id="age">
                 <Form.Label>Password</Form.Label>
-                <Form.Control required type="password" />
+                <Form.Control
+                  required
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">
               <Form.Group id="gender">
                 <Form.Label>Email ID</Form.Label>
-                <Form.Control required type="email" placeholder="abc@abc.com" />
+                <Form.Control
+                  required
+                  type="email"
+                  placeholder="abc@abc.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">
               <Form.Group id="phone">
                 <Form.Label>Phone</Form.Label>
-                <Form.Control required type="number" placeholder="+91 12345 67890" />
+                <Form.Control
+                  required
+                  type="number"
+                  placeholder="+91 12345 67890"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
               </Form.Group>
             </Col>
           </Row>
 
           <Row>
-          <Col md={4} className="mb-3">
+            <Col md={4} className="mb-3">
               <Form.Group id="age">
                 <Form.Label>Licence No.</Form.Label>
-                <Form.Control required type="text" />
+                <Form.Control
+                  required
+                  type="text"
+                  value={licence}
+                  onChange={(e) => setLicence(e.target.value)}
+                />
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">
               <Form.Group id="gender">
                 <Form.Label>Specialization</Form.Label>
-                <Form.Control required type="text" />
+                <Form.Control
+                  required
+                  type="text"
+                  value={specialization}
+                  onChange={(e) => setSpecialization(e.target.value)}
+                />
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">
               <Form.Group id="gender">
                 <Form.Label>Position</Form.Label>
-                <Form.Control required type="text" />
+                <Form.Control
+                  required
+                  type="text"
+                  value={position}
+                  onChange={(e) => setPosition(e.target.value)}
+                />
               </Form.Group>
             </Col>
           </Row>
@@ -83,13 +165,26 @@ export const DocsignUp = () => {
             <Col sm={9} className="mb-3">
               <Form.Group id="address">
                 <Form.Label>Address</Form.Label>
-                <Form.Control as = "textarea" required type="text" placeholder="Enter address of the Doctor" />
+                <Form.Control
+                  as="textarea"
+                  required
+                  type="text"
+                  placeholder="Enter address of the Doctor"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
               </Form.Group>
             </Col>
           </Row>
           <div className="mt-3">
-          <span><Button variant="primary" type="submit" onClick = {handleSubmit}>Register</Button> &nbsp; &nbsp;
-            <Button variant="primary" type="submit" onClick = {handleSubmit}>Update</Button>
+            <span>
+              <Button variant="primary" type="submit" onClick={handleRegister}>
+                Register
+              </Button>{" "}
+              &nbsp; &nbsp;
+              <Button variant="primary" type="submit" onClick={handleSubmit}>
+                Update
+              </Button>
             </span>
           </div>
         </Form>
