@@ -128,19 +128,7 @@ export default () => {
           </Card>
         </Col>
         <Col xs={12} className="text-center d-flex align-items-center justify-content-center">
-                <Button
-                  as={Link}
-                  variant="primary"
-                  className="animate-hover"
-                  to={Routes.Presentation.path}
-                >
-                  <FontAwesomeIcon
-                    icon={faChevronLeft}
-                    className="animate-center-3 me-3 ms-2"
-                  />
-                  Go back home
-                </Button>
-                </Col>
+        </Col>
       </Row>
       <br />
       </section>

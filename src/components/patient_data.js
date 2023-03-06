@@ -39,11 +39,7 @@ export const GeneralInfoForm = () => {
             <Col md={4} className="mb-3">
               <Form.Group id="gender">
                 <Form.Label>Gender</Form.Label>
-                <Form.Select defaultValue="0">
-                  <option value="0">None</option>
-                  <option value="1">Female</option>
-                  <option value="2">Male</option>
-                </Form.Select>
+                <Form.Control required type="text" placeholder="Gender" />
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">

@@ -50,7 +50,7 @@ export const DocQueForm = () => {
             </Col>
             </Row>
             <div className="mt-3">
-            <Button variant="primary" type="submit" onClick = {handleSubmit}>Get Doctor Schedule</Button>
+            <Button variant="primary" type="submit" onClick = {handleSubmit}>Get Available Slots</Button>
           </div>
         </Form>
       </Card.Body>

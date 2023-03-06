@@ -165,7 +165,7 @@ export const TransactionsTable = () => {
           <Table hover className="user-table align-items-center">
             <thead>
               <tr>
-                <th className="border-bottom">Appointment ID</th>
+                <th className="border-bottom">Patient ID</th>
                 <th className="border-bottom">Patient Name</th>
                 <th className="border-bottom">Admit Date</th>
                 <th className="border-bottom">Discharge Date</th>

@@ -40,12 +40,6 @@ export const AppointmentForm = () => {
                 <Form.Control required type="number" placeholder="123" onChange={(e) => setName(e.target.value)} />
               </Form.Group>
             </Col>
-            <Col md={6} className="mb-3">
-              <Form.Group id="firstName">
-                <Form.Label>Room Number</Form.Label>
-                <Form.Control required type="number" placeholder="145" onChange={(e) => setName(e.target.value)} />
-              </Form.Group>
-            </Col>
             </Row>
             <div className="mt-3">
             <Button variant="primary" type="submit" onClick = {handleSubmit}>Set Appointment</Button>

@@ -9,12 +9,6 @@ import AugmentedAxios from "../utils/augmentedAxios";
 import { useState, useEffect } from "react";
 
 export default() => {
-  const [AvlRoom, setRoom] = useState([]);
-    useEffect(() => {
-    AugmentedAxios.get(`${BACKEND_URL}/room/freelist`).then((res) => {
-      setRoom(res.data.roomList);
-    });
-  }, []);
 
   // useEffect(() => {
   //   AugmentedAxios.get(`${BACKEND_URL}/block/list`).then((res) => {
@@ -30,16 +24,15 @@ export default() => {
           <DocQueForm />
         </Col>
         <Col xs = {12} xl={6}>
-      < SlotTable />
+        <AppointmentForm />
       </Col>
         </Row>
         <Row>
-        <Col xs={12} xl={6}>
-          <AppointmentForm />
+          <Col xs ={12} xl={1}></Col>
+        <Col xs={12} xl={10}>
+        < SlotTable />
         </Col>
-        <Col xs = {12} xl={6}>
-      < RoomTable AvlRoomList = {AvlRoom}/>
-      </Col>
+        <br />
         </Row>
         </>
     );

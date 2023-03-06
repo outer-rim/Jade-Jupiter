@@ -67,7 +67,7 @@ export const Routes = {
   History: { path: "/history" },
   Vision: { path: "/vision" },
   DocsFolderStructure: { path: "/documentation/folder-structure" },
-  DocsBuild: { path: "/documentation/build-tools" },
+  DocsBuild: { path: "/doctors/doctorslist" },
   DocsChangelog: { path: "/documentation/changelog" },
 
   // components

@@ -40,6 +40,7 @@ export const DocsignUp = (props) => {
       .then((response) => {
         if (response.status === 200) {
           window.alert("Doctor Registered Successfully");
+          window.location.reload();
         }
       })
       .catch((e) => {

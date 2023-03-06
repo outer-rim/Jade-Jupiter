@@ -1,14 +1,32 @@
 import React from "react";
+import { useState } from "react";
+import { BACKEND_URL } from "../constants";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCog, faHome, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Form, Button, ButtonGroup, Breadcrumb, InputGroup, Dropdown } from '@themesberg/react-bootstrap';
 
 import { TransactionsTable } from "../components/Widgets";
+import AugmentedAxios from "../utils/augmentedAxios";
 
 export default () => {
+  const [id, setId] = useState(0);
   const handlesub = (e) => {
     e.preventDefault();
-    console.log("I am called");
+    AugmentedAxios.post(`${BACKEND_URL}/stay/discharge`, {
+      id: id
+    }).then((result) => {
+      if(result.status == 200)
+      {
+        window.alert("Patient Discharged Successfully");
+        window.location.reload();
+      }
+    }).catch((error) => {
+      if(error.status == 404)
+      {
+        window.alert("No such Patient Found");
+      }
+      console.log(error)
+    })
   }
   return (
     <>
@@ -20,7 +38,7 @@ export default () => {
               <Form.Group id="topbarSearch">
                 <InputGroup className="input-group-merge">
                   <InputGroup.Text><FontAwesomeIcon icon={faSearch} /></InputGroup.Text>
-                  <Form.Control type="number" placeholder="999" />
+                  <Form.Control type="number" placeholder="999" onChange={(e) => setId(e.target.value)}/>
                   <Button variant="info" className="me-2" style = {{color: "white"}} onClick = {handlesub}>
                   <span>Discharge</span>
                   </Button>
