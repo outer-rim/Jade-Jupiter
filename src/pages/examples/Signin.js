@@ -35,6 +35,7 @@ export default () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(email, password);
     return axios
       .post(`${BACKEND_URL}/auth/login`, {
         email: email,

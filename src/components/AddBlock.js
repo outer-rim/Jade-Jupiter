@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { BACKEND_URL } from "../constants.js";
+import AugmentedAxios from "../utils/augmentedAxios";
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,13 +9,24 @@ import { Col, Row, Card, Form, Button, InputGroup } from '@themesberg/react-boot
 
 
 export default () => {
-  const [birthday, setBirthday] = useState("");
-  const [name, setName] = useState("");
-  console.log(name);
+  const [floor, setFloor] = useState(0);
+  const [code, setCode] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("I am called");
+    AugmentedAxios.post(`${BACKEND_URL}/block/add`, {
+      floor: floor,
+      code: code,
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          window.alert("Block Added Successfully");
+          window.location.reload();
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   return (
@@ -27,13 +40,13 @@ export default () => {
             <Col md={6} className="mb-3">
               <Form.Group id="floor">
                 <Form.Label>Floor</Form.Label>
-                <Form.Control required type="number" placeholder="35" />
+                <Form.Control required type="number" placeholder="35" onChange={(e) => setFloor(e.target.value)} />
               </Form.Group>
             </Col>
             <Col md={6} className="mb-3">
               <Form.Group id="code">
                 <Form.Label>Code</Form.Label>
-                <Form.Control required type="number" placeholder="35" />
+                <Form.Control required type="number" placeholder="35" onChange={(e) => setCode(e.target.value)} />
               </Form.Group>
             </Col>
           </Row>

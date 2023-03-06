@@ -33,7 +33,7 @@ export const DocQueForm = () => {
                 <Form.Label>Date</Form.Label>
                 <Datetime
                   timeFormat={false}
-                  onChange={(e) => setBirthday(e._d)}
+                  onChange={(e) => setBirthday(e)}
                   renderInput={(props, openCalendar) => (
                     <InputGroup>
                       <InputGroup.Text><FontAwesomeIcon icon={faCalendarAlt} /></InputGroup.Text>

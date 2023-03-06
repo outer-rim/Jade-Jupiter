@@ -13,21 +13,24 @@ import {
 import { Link } from "react-router-dom";
 
 import { Routes } from "../../routes";
+import TopNav from "../../components/top_nav";
+import Footer from "../../components/foot";
 
 export default () => {
   return (
     <main>
-      <section className="align-items-center justify-content-center">
+      <TopNav />
+      <section className="align-items-center justify-content-center container">
       <Row>
         <Col xs={12} className="p-3"> 
           <Card>
             <Card.Body>
               <article>
-                <h1 className="h1" id="overview">
+                <h1 className="h1 text-center" id="overview">
                   About Us{" "}
                 </h1>
-                <p className="fs-5 fw-light">GLOBAL HOSPITALS</p>
-                <p>Provide best quality healthcare for you</p>
+                <p className="fs-5" style = {{color: "Blue", fontWeight: "bold"}}>GLOBAL HOSPITALS</p>
+                <p>Provides best quality healthcare for you</p>
                 <p>
                   Global Hospitals Enterprise Limited is an Indian multinational
                   healthcare group headquartered in Chennai. Along with the
@@ -139,7 +142,9 @@ export default () => {
                 </Button>
                 </Col>
       </Row>
+      <br />
       </section>
+      <Footer />
     </main>
   );
 };

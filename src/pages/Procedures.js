@@ -7,15 +7,20 @@ import { GeneralInfoForm } from "../components/Patient_signup";
 import { PageTrafficTable, RankingTable } from "../components/Tables";
 import AddProcedure from "../components/AddProcedure";
 import { ProcedureTable } from "../components/Widgets";
-
-
 import Profile3 from "../assets/img/team/profile-picture-3.jpg";
+import { useState, useEffect } from "react";
+import { BACKEND_URL } from "../constants.js";
+import axios from "axios";
+import AugmentedAxios from "../utils/augmentedAxios";
 
 export default () => {
-    const handlesub = (e) => {
-      e.preventDefault();
-      console.log("I am called");
-    }
+  const [procedure, setProcedure] = useState([]);
+  useEffect(() => {
+    AugmentedAxios.get(`${BACKEND_URL}/procedure/list`).then((res) => {
+      setProcedure(res.data.procedures);
+      console.log(res.data.procedures);
+    }).catch((e) => {console.log(e);});
+  }, []);
 
     return (
         <>  
@@ -24,7 +29,7 @@ export default () => {
               <AddProcedure />
             </Col>
             <Col xs={12} xl={12}>
-              <ProcedureTable />
+              <ProcedureTable ProcedureList={procedure} />
             </Col>
           </Row>
         </>

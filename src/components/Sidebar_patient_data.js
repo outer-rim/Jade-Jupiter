@@ -236,7 +236,7 @@ export default (props = {}) => {
               />
 
               <NavItem title="Doctors List" icon={faChartPie} link={Routes.Doctors.path3} />
-              <NavItem title="Patients List" icon={faChartPie} link={Routes.Doctors.path3} />
+              <NavItem title="Patients List" icon={faChartPie} link={Routes.Patients.path} />
               <Button
                 as={Link}
                 onClick={handleSignOut}

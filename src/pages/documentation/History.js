@@ -13,14 +13,18 @@ import {
 import { Link } from "react-router-dom";
 
 import { Routes } from "../../routes";
+import TopNav from "../../components/top_nav";
+import Footer from "../../components/foot";
 export default () => (
+  <>
+  <TopNav />
   <Container className="px-0">
     <Row>
       <Col xs={12} className="p-3">
         <Card>
           <Card.Body>
             <article>
-              <h1 className="h2" id="quick-start">History </h1>
+              <h1 className="h2 text-center" id="quick-start">History </h1>
               <p className="fs-5 fw-dark">Global Hospitals</p>
               
               <p><b>Global Hospitals</b> was established in 1983 by Dr. Prathap C Reddy, renowned as the architect of modern healthcare in India. As the nation's first corporate hospital, Global Hospitals is acclaimed for pioneering the private healthcare revolution in the country.</p>
@@ -66,5 +70,8 @@ export default () => (
                 </Button>
                 </Col>
     </Row>
+    <br />
   </Container>
+  <Footer />
+  </>
 );

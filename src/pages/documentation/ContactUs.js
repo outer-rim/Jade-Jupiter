@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useAlert, positions, transitions, types } from "react-alert";
 import {
   faAngleLeft,
   faEnvelope,
@@ -31,24 +33,29 @@ export default () => {
   const [message, setMessage] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
-    return axios
-      .post(`${BACKEND_URL}/auth/login`, {
-        email: email,
-        name: name,
-        message: message,
-      })
-      .then((response) => {
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-        window.location.assign(`${FRONTEND_URL}/dashboard`);
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err.response.status === 401) {
-          window.alert("Credentials inavlid");
-        } else {
-          window.alert("Server error");
-        }
-      });
+    var values = {
+      from_name: name,
+      fr_email: email,
+      message: message
+    };
+    emailjs.send('service_z01kskn', 'template_ycr1q1t', values, 'nXuDLCoHJrKB4wH7g').then(
+      (result) => {
+        console.log(result.text);
+        window.alert(
+          "Your Query has been recorded. We will get back to you soon.",
+        );
+        setName('');
+        setEmail('');
+        setMessage('');
+      },
+      (error) => {
+        console.log(error.text);
+        window.alert(
+          "We ran into some error, please try again after some time.",
+        );
+      }
+    );
+
   };
   return (
     <main>

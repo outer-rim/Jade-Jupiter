@@ -13,14 +13,18 @@ import {
 import { Link } from "react-router-dom";
 
 import { Routes } from "../../routes";
+import TopNav from "../../components/top_nav";
+import Footer from "../../components/foot";
 export default () => (
+  <>
+  <TopNav />
   <Container className="px-0">
     <Row>
       <Col xs={12} className="p-3">
         <Card>
           <Card.Body>
             <article>
-              <h1 className="h2" id="license">Vision</h1>
+              <h1 className="h2 text-center" id="license">Vision</h1>
               <p className="fs-5 fw-light">Our Vision</p>
                 Apollo's vision for the next phase of development is to ‘Touch a Billion Lives’.
               <br></br>
@@ -48,4 +52,7 @@ export default () => (
                 </Col>
     </Row>
   </Container>
+  <br />
+  <Footer />
+  </>
 );

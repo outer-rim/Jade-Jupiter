@@ -326,34 +326,24 @@ export const PatientTableForAppointDoc = () => {
   );
 };
 
-export const MedicationList = () => {
+export const MedicationList = (props) => {
+  const { AllMedicationList } = props;
   const TableRow = (props) => {
-    const {
-      country,
-      countryImage,
-      overallRank,
-      overallRankChange,
-      travelRank,
-      travelRankChange,
-      widgetsRank,
-      widgetsRankChange,
-    } = props;
-
     return (
       <tr>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{props.id}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{props.name}</td>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{props.brand}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{props.description}</td>
+        <td className="fw-bold border-0">{props.cost}</td>
       </tr>
     );
   };
@@ -365,7 +355,6 @@ export const MedicationList = () => {
       style={{ overflowY: "scroll", height: "60vh" }}
     >
       <br />
-      <h2 className="text-center"> Medicines List </h2>
       <Card.Body className="pb-0">
         <Table responsive className="table-centered table-nowrap rounded mb-0">
           <thead className="thead-light">
@@ -378,7 +367,7 @@ export const MedicationList = () => {
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map((r) => (
+            {AllMedicationList.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>
@@ -388,27 +377,20 @@ export const MedicationList = () => {
   );
 };
 
-export const PatientTable = () => {
+export const PatientTable = (props) => {
+  const { AllPatientList } = props;
   const TableRow = (props) => {
-    const {
-      country,
-      countryImage,
-      overallRank,
-      overallRankChange,
-      travelRank,
-      travelRankChange,
-      widgetsRank,
-      widgetsRankChange,
-    } = props;
-
     return (
       <tr>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{props.id}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{props.name}</td>
+        <td className="fw-bold border-0">{props.gender}</td>
+        <td className="fw-bold border-0">{props.age}</td>
+        <td className="fw-bold border-0">{props.phone}</td>
       </tr>
     );
   };
@@ -427,10 +409,13 @@ export const PatientTable = () => {
             <tr>
               <th className="border-0">Patient ID</th>
               <th className="border-0">Patient Name</th>
+              <th className="border-0">Gender</th>
+              <th className="border-0">Age</th>
+              <th className="border-0">Phone</th>
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map((r) => (
+            {AllPatientList.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>
@@ -530,28 +515,19 @@ export const OperatorTable = (props) => {
   );
 };
 
-export const AllRoomTable = () => {
+export const AllRoomTable = (props) => {
+  const {AllRoomList} = props;
   const TableRow = (props) => {
-    const {
-      country,
-      countryImage,
-      overallRank,
-      overallRankChange,
-      travelRank,
-      travelRankChange,
-      widgetsRank,
-      widgetsRankChange,
-    } = props;
-
     return (
       <tr>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{props.room_number}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{props.type}</td>
+        <td className="fw-bold border-0">{props.cost}</td>
+        <td className="fw-bold border-0">{props.available ? <span style={{color: "green"}}>Available</span> : <span style={{color: "red"}}>Booked</span>}</td>
       </tr>
     );
   };
@@ -571,10 +547,11 @@ export const AllRoomTable = () => {
               <th className="border-0">Room Number</th>
               <th className="border-0">Room Type</th>
               <th className="border-0">Cost</th>
+              <th className="border-0">Availability</th>
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map((r) => (
+            {AllRoomList.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>
@@ -584,27 +561,18 @@ export const AllRoomTable = () => {
   );
 };
 
-export const RoomTable = () => {
+export const RoomTable = (props) => {
+  const {AvlRoomList} = props;
   const TableRow = (props) => {
-    const {
-      country,
-      countryImage,
-      overallRank,
-      overallRankChange,
-      travelRank,
-      travelRankChange,
-      widgetsRank,
-      widgetsRankChange,
-    } = props;
-
     return (
       <tr>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{props.room_number}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{props.type}</td>
+        <td className="fw-bold border-0">{props.cost}</td>
       </tr>
     );
   };
@@ -623,10 +591,11 @@ export const RoomTable = () => {
             <tr>
               <th className="border-0">Room Number</th>
               <th className="border-0">Room Type</th>
+              <th className="border-0">Cost</th>
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map((r) => (
+            {AvlRoomList.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>
@@ -636,28 +605,18 @@ export const RoomTable = () => {
   );
 };
 
-export const BlockTable = () => {
+export const BlockTable = (props) => {
+  const {BlockList} = props;
   const TableRow = (props) => {
-    const {
-      country,
-      countryImage,
-      overallRank,
-      overallRankChange,
-      travelRank,
-      travelRankChange,
-      widgetsRank,
-      widgetsRankChange,
-    } = props;
-
     return (
       <tr>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{props.id}</td>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{props.floor}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{props.code}</td>
       </tr>
     );
   };
@@ -680,7 +639,7 @@ export const BlockTable = () => {
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map((r) => (
+            {BlockList.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>
@@ -690,28 +649,18 @@ export const BlockTable = () => {
   );
 };
 
-export const ProcedureTable = () => {
+export const ProcedureTable = (props) => {
+  const {ProcedureList} = props;
   const TableRow = (props) => {
-    const {
-      country,
-      countryImage,
-      overallRank,
-      overallRankChange,
-      travelRank,
-      travelRankChange,
-      widgetsRank,
-      widgetsRankChange,
-    } = props;
-
     return (
       <tr>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{props.id}</td>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{props.name}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{props.cost}</td>
       </tr>
     );
   };
@@ -734,7 +683,7 @@ export const ProcedureTable = () => {
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map((r) => (
+            {ProcedureList.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>

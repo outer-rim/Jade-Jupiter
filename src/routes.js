@@ -18,6 +18,7 @@ export const Routes = {
   Settings: { path: "/dashboard/patient_info" },
   FDAdmit: { path: "/dashboard/admit_patient" },
   FDAppoint: { path: "/dashboard/appoint_patient" },
+  Patients: {path: "/dashboard2/patientlist"},
   Doctors: {
     path: "/dashboard/doctor_list",
     path2: "/dashboardadmin/doctor_list",

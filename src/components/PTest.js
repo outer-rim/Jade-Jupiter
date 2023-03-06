@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { BACKEND_URL } from "../constants.js";
+import AugmentedAxios from "../utils/augmentedAxios";
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,13 +9,35 @@ import { Col, Row, Card, Form, Button, InputGroup } from '@themesberg/react-boot
 
 
 export default () => {
-  const [birthday, setBirthday] = useState("");
+  const [id, setId] = useState(0);
   const [name, setName] = useState("");
-  console.log(name);
+  const [tname, setTname] = useState("");
+  const [tid, setTid] = useState(0);
+  const [stat, setStat] = useState("");
+  const [aid, setAid] = useState(0);
+  const [cost, setCost] = useState(0);
+  const [date, setDate] = useState("");
+  const [url, setUrl] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("I am called");
+    AugmentedAxios.post(`${BACKEND_URL}/test/create`, {
+      name: tname,
+      file_url: url,
+      appointment_id: aid,
+      report_status: stat,
+      cost: cost,
+      date: date,
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          window.alert("Test for Patient Added Successfully");
+          window.location.reload();
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   return (
@@ -32,7 +56,7 @@ export default () => {
             <Col md={4} className="mb-3">
               <Form.Group id="pid">
                 <Form.Label>Patient ID</Form.Label>
-                <Form.Control required type="number" placeholder="35" />
+                <Form.Control required type="number" placeholder="35" onChange={(e) => setId(e.target.value)}/>
               </Form.Group>
             </Col>
           </Row>
@@ -40,13 +64,13 @@ export default () => {
             <Col md={8} className="mb-3">
               <Form.Group id="testName">
                 <Form.Label>Test Name</Form.Label>
-                <Form.Control required type="text" placeholder="Enter test name" onChange={(e) => setName(e.target.value)} />
+                <Form.Control required type="text" placeholder="Enter test name" onChange={(e) => setTname(e.target.value)} />
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">
               <Form.Group id="tid">
                 <Form.Label>Test ID</Form.Label>
-                <Form.Control required type="number" placeholder="35" />
+                <Form.Control required type="number" placeholder="35" onChange={(e) => setTid(e.target.value)}/>
               </Form.Group>
             </Col>
           </Row>
@@ -54,7 +78,7 @@ export default () => {
             <Col sm={9} className="mb-3">
               <Form.Group id="results">
                 <Form.Label>Test Results / Details</Form.Label>
-                <Form.Control as = "textarea" required type="text" placeholder="Enter the test results" />
+                <Form.Control as = "textarea" required type="text" placeholder="Enter the test results" onChange={(e) => setStat(e.target.value)}/>
               </Form.Group>
             </Col>
           </Row>
@@ -62,13 +86,13 @@ export default () => {
             <Col md={4} className="mb-3">
               <Form.Group id="aid">
                 <Form.Label>Appointment ID</Form.Label>
-                <Form.Control required type="number" placeholder="35" onChange={(e) => setName(e.target.value)} />
+                <Form.Control required type="number" placeholder="35" onChange={(e) => setAid(e.target.value)} />
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">
               <Form.Group id="cost">
                 <Form.Label>Cost</Form.Label>
-                <Form.Control required type="number" placeholder="35" onChange={(e) => setName(e.target.value)} />
+                <Form.Control required type="number" placeholder="35" onChange={(e) => setCost(e.target.value)} />
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">
@@ -76,14 +100,14 @@ export default () => {
                 <Form.Label>Date</Form.Label>
                 <Datetime
                   timeFormat={false}
-                  onChange={(e) => setBirthday(e._d)}
+                  onChange={(e) => setDate(e._d)}
                   renderInput={(props, openCalendar) => (
                     <InputGroup>
                       <InputGroup.Text><FontAwesomeIcon icon={faCalendarAlt} /></InputGroup.Text>
                       <Form.Control
                         required
                         type="text"
-                        value={birthday ? moment(birthday).format("DD/MM/YYYY") : ""}
+                        value={date ? moment(date).format("DD/MM/YYYY") : ""}
                         placeholder="dd/mm/yyyy"
                         onFocus={openCalendar}
                         onChange={() => { }} />
@@ -96,7 +120,7 @@ export default () => {
             <Col md={12} className="mb-3">
               <Form.Group id="fileURL">
                 <Form.Label>Add File URL</Form.Label>
-                <Form.Control required type="text" placeholder="Enter file URL" onChange={(e) => setName(e.target.value)} />
+                <Form.Control required type="text" placeholder="Enter file URL" onChange={(e) => setUrl(e.target.value)} />
               </Form.Group>
             </Col>
           </Row>

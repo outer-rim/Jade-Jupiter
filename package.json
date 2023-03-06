@@ -24,6 +24,7 @@
   },
   "version": "1.0.1",
   "dependencies": {
+    "@emailjs/browser": "^3.10.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
@@ -40,6 +41,7 @@
     "fontawesome": "^5.6.3",
     "moment-timezone": "^0.5.31",
     "react": "^16.13.1",
+    "react-alert": "^7.0.3",
     "react-chartist": "^0.14.4",
     "react-copy-to-clipboard": "^5.0.3",
     "react-datetime": "^3.0.4",

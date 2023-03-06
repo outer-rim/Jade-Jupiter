@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { BACKEND_URL } from "../constants.js";
+import AugmentedAxios from "../utils/augmentedAxios";
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,13 +9,24 @@ import { Col, Row, Card, Form, Button, InputGroup } from '@themesberg/react-boot
 
 
 export default () => {
-  const [birthday, setBirthday] = useState("");
   const [name, setName] = useState("");
-  console.log(name);
+  const [cost, setCost] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("I am called");
+    AugmentedAxios.post(`${BACKEND_URL}/procedure/add`, {
+      name: name,
+      cost: cost,
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          window.alert("Procedure Added Successfully");
+          window.location.reload();
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   return (
@@ -32,7 +45,7 @@ export default () => {
             <Col md={4} className="mb-3">
               <Form.Group id="cost">
                 <Form.Label>Cost</Form.Label>
-                <Form.Control required type="number" placeholder="10000" />
+                <Form.Control required type="number" placeholder="10000" onChange={(e) => setCost(e.target.value)} />
               </Form.Group>
             </Col>
           </Row>

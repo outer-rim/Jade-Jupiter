@@ -78,6 +78,8 @@ import Tables from "./components/Tables";
 import Tabs from "./components/Tabs";
 import Tooltips from "./components/Tooltips";
 import Toasts from "./components/Toasts";
+import patients from "./patients";
+import medicines from "./medicines";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -341,7 +343,7 @@ export default () => (
     <RouteWithSidebarData
       exact
       path={Routes.MedicineShow.path2}
-      component={MedicationList}
+      component={medicines}
     />
     <RouteWithSidebarData
       exact
@@ -367,6 +369,12 @@ export default () => (
       exact
       path={Routes.AddBlock.path}
       component={AddBlock}
+    />
+
+    <RouteWithSidebarData
+      exact
+      path={Routes.Patients.path}
+      component={patients}
     />
 
     {/*Doctors*/}

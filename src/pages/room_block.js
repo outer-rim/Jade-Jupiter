@@ -8,12 +8,31 @@ import { PageTrafficTable, RankingTable } from "../components/Tables";
 import AddRoom from "../components/AddRoom";
 import AddBlock from "../components/AddBlock";
 import { AllRoomTable, BlockTable } from "../components/Widgets";
+import { useState, useEffect } from "react";
+import { BACKEND_URL } from "../constants.js";
+import axios from "axios";
+import AugmentedAxios from "../utils/augmentedAxios";
 
 export default () => {
     const handlesub = (e) => {
       e.preventDefault();
       console.log("I am called");
     }
+
+    const [AllRoom, setRoom] = useState([]);
+    const [block, setBlock] = useState([]);
+    useEffect(() => {
+    AugmentedAxios.get(`${BACKEND_URL}/room/list`).then((res) => {
+      setRoom(res.data.roomList);
+    });
+  }, []);
+
+  useEffect(() => {
+    AugmentedAxios.get(`${BACKEND_URL}/block/list`).then((res) => {
+      setBlock(res.data.blocks);
+    });
+  }, []);
+
   
     return (
       <>
@@ -25,10 +44,10 @@ export default () => {
             <AddBlock />
           </Col>
           <Col xs={12} xl={6}>
-            <AllRoomTable />
+            <AllRoomTable AllRoomList = {AllRoom}/>
           </Col>
           <Col xs={12} xl={6}>
-            <BlockTable />
+            <BlockTable BlockList = {block}/>
           </Col>
         </Row>
       </>
