@@ -3,15 +3,20 @@ import { BACKEND_URL } from "../constants.js";
 import AugmentedAxios from "../utils/augmentedAxios";
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-import { Col, Row, Card, Form, Button, InputGroup } from '@themesberg/react-bootstrap';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  Col,
+  Row,
+  Card,
+  Form,
+  Button,
+  InputGroup,
+} from "@themesberg/react-bootstrap";
 
 export default () => {
-  const [num, setNum] = useState("");
+  const [num, setNum] = useState(0);
   const [type, setType] = useState("");
-  const [av, setAv] = useState(true);
   const [bid, setBid] = useState(0);
   const [cost, setCost] = useState(0);
 
@@ -21,7 +26,6 @@ export default () => {
       room_number: num,
       type: type,
       cost: cost,
-      available: av,
       block_id: bid,
     })
       .then((response) => {
@@ -33,7 +37,7 @@ export default () => {
       .catch((e) => {
         console.log(e);
       });
-  }
+  };
 
   return (
     <Card border="light" className="bg-white shadow-sm mb-4">
@@ -41,17 +45,29 @@ export default () => {
         <h1 className="text-center">Add Rooms</h1>
         <h5 className="mb-4">Add Room Details</h5>
         <Form>
-        <Row className="align-items-center">
+          <Row className="align-items-center">
             <Col md={6} className="mb-3">
               <Form.Group id="room">
                 <Form.Label>Room No.</Form.Label>
-                <Form.Control required type="number" placeholder="35" onChange={(e) => setNum(e.target.value)} />
+                <Form.Control
+                  required
+                  type="number"
+                  placeholder="35"
+                  value={num}
+                  onChange={(e) => setNum(e.target.value)}
+                />
               </Form.Group>
             </Col>
             <Col md={6} className="mb-3">
               <Form.Group id="type">
                 <Form.Label>Type</Form.Label>
-                <Form.Control required type="text" placeholder="ICU" onChange={(e) => setType(e.target.value)} />
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="ICU"
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                />
               </Form.Group>
             </Col>
           </Row>
@@ -59,18 +75,33 @@ export default () => {
             <Col md={6} className="mb-3">
               <Form.Group id="bid">
                 <Form.Label>Block ID</Form.Label>
-                <Form.Control required type="number" placeholder="35" onChange={(e) => setBid(e.target.value)} />
+                <Form.Control
+                  required
+                  type="number"
+                  placeholder="35"
+                  value={bid}
+                  onChange={(e) => setBid(e.target.value)}
+                />
               </Form.Group>
             </Col>
             <Col md={6} className="mb-3">
               <Form.Group id="cost">
                 <Form.Label>Cost</Form.Label>
-                <Form.Control required type="number" placeholder="10000" onChange={(e) => setCost(e.target.value)} />
+                <Form.Control
+                  required
+                  type="number"
+                  placeholder="10000"
+                  value={cost}
+                  onChange={(e) => setCost(e.target.value)}
+                />
               </Form.Group>
             </Col>
           </Row>
           <div className="mt-3">
-            <span><Button variant="primary" type="submit" onClick = {handleSubmit}>Add</Button>
+            <span>
+              <Button variant="primary" type="submit" onClick={handleSubmit}>
+                Add
+              </Button>
             </span>
           </div>
         </Form>

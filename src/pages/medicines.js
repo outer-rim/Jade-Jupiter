@@ -1,5 +1,10 @@
 import { AdmitForm } from "../components/admit_form";
-import { DoctorTable, PatientTable, RoomTable, MedicationList } from "../components/Widgets";
+import {
+  DoctorTable,
+  PatientTable,
+  RoomTable,
+  MedicationList,
+} from "../components/Widgets";
 import {
   Col,
   Row,
@@ -15,11 +20,16 @@ import AugmentedAxios from "../utils/augmentedAxios";
 
 export default () => {
   const [medication, setMedication] = useState([]);
+
   useEffect(() => {
-    AugmentedAxios.get(`${BACKEND_URL}/medication/list`).then((res) => {
-      setMedication(res.data.medications);
-      console.log(res.data.medications);
-    }).catch((e) => {console.log(e);});
+    AugmentedAxios.get(`${BACKEND_URL}/medication/list`)
+      .then((res) => {
+        setMedication(res.data.medications);
+        console.log(res.data.medications);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }, []);
 
   return (

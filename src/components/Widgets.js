@@ -202,38 +202,28 @@ const ValueChange = ({ value, suffix }) => {
   );
 };
 
-export const PatientTableForDoc = () => {
+export const PatientTableForDoc = (props) => {
   const TableRow = (props) => {
-    const {
-      country,
-      countryImage,
-      overallRank,
-      overallRankChange,
-      travelRank,
-      travelRankChange,
-      widgetsRank,
-      widgetsRankChange,
-    } = props;
-
     return (
       <tr>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{props.id}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{props.name}</td>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{props.id}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{props.id}</td>
+        <td className="fw-bold border-0">{props.id}</td>
       </tr>
     );
   };
 
+  const { patients } = props;
   return (
     <Card
       border="light"
@@ -254,7 +244,7 @@ export const PatientTableForDoc = () => {
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map((r) => (
+            {patients.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>
@@ -264,7 +254,7 @@ export const PatientTableForDoc = () => {
   );
 };
 
-export const PatientTableForAppointDoc = () => {
+export const PatientTableForAppointDoc = (props) => {
   const TableRow = (props) => {
     const {
       country,
@@ -295,6 +285,9 @@ export const PatientTableForAppointDoc = () => {
       </tr>
     );
   };
+
+  const { appointments } = props;
+  console.log(appointments);
 
   return (
     <Card
@@ -328,6 +321,7 @@ export const PatientTableForAppointDoc = () => {
 
 export const MedicationList = (props) => {
   const { AllMedicationList } = props;
+  console.log(AllMedicationList);
   const TableRow = (props) => {
     return (
       <tr>
@@ -516,7 +510,7 @@ export const OperatorTable = (props) => {
 };
 
 export const AllRoomTable = (props) => {
-  const {AllRoomList} = props;
+  const { AllRoomList } = props;
   const TableRow = (props) => {
     return (
       <tr>
@@ -527,7 +521,13 @@ export const AllRoomTable = (props) => {
         </td>
         <td className="fw-bold border-0">{props.type}</td>
         <td className="fw-bold border-0">{props.cost}</td>
-        <td className="fw-bold border-0">{props.available ? <span style={{color: "green"}}>Available</span> : <span style={{color: "red"}}>Booked</span>}</td>
+        <td className="fw-bold border-0">
+          {props.available ? (
+            <span style={{ color: "green" }}>Available</span>
+          ) : (
+            <span style={{ color: "red" }}>Booked</span>
+          )}
+        </td>
       </tr>
     );
   };
@@ -562,7 +562,7 @@ export const AllRoomTable = (props) => {
 };
 
 export const RoomTable = (props) => {
-  const {AvlRoomList} = props;
+  const { AvlRoomList } = props;
   const TableRow = (props) => {
     return (
       <tr>
@@ -606,7 +606,7 @@ export const RoomTable = (props) => {
 };
 
 export const BlockTable = (props) => {
-  const {BlockList} = props;
+  const { BlockList } = props;
   const TableRow = (props) => {
     return (
       <tr>
@@ -650,7 +650,7 @@ export const BlockTable = (props) => {
 };
 
 export const ProcedureTable = (props) => {
-  const {ProcedureList} = props;
+  const { ProcedureList } = props;
   const TableRow = (props) => {
     return (
       <tr>

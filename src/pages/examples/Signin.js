@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -28,6 +28,7 @@ import BgImage from "../../assets/img/illustrations/signin.svg";
 import BgImg from "../../assets/img/bg1.jpg";
 import { FRONTEND_URL, BACKEND_URL } from "../../constants.js";
 import axios from "axios";
+import AugmentedAxios from "../../utils/augmentedAxios";
 
 export default () => {
   const [email, setEmail] = useState("");
@@ -73,6 +74,43 @@ export default () => {
         }
       });
   };
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    console.log(token);
+    if (token) {
+      AugmentedAxios.get(`${BACKEND_URL}/auth/verify`)
+        .then((response) => {
+          console.log(response);
+          localStorage.setItem("role", JSON.stringify(response.data.user.role));
+          switch (response.data.user.role) {
+            case "admin":
+              window.location.assign(`${FRONTEND_URL}/dashboardadmin`);
+              break;
+            case "data_entry":
+              window.location.assign(`${FRONTEND_URL}/dashboard2`);
+              break;
+            case "front_desk":
+              window.location.assign(`${FRONTEND_URL}/dashboard`);
+              break;
+            case "doctor":
+              window.location.assign(`${FRONTEND_URL}/dashboarddoctor`);
+              break;
+            default:
+              window.location.assign(`${FRONTEND_URL}/`);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.response.status === 401) {
+            window.alert("Credentials invalid");
+          }
+        });
+    } else {
+      return;
+    }
+  }, []);
+
   return (
     <main>
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">

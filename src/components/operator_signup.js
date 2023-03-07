@@ -105,7 +105,7 @@ export const OpsignUp = (props) => {
                 <Form.Control
                   required
                   type="text"
-                  placeholder="front-desk"
+                  placeholder="front_desk / data_entry"
                   defaultValue={props.operator.role}
                   onChange={(e) => setRole(e.target.value)}
                 />
