@@ -22,24 +22,40 @@ import {
   faRocket,
   faStore,
 } from "@fortawesome/free-solid-svg-icons";
-import React, { useEffect } from "react";
+import axios from "axios";
+import { BACKEND_URL } from "../constants";
+import React, { useState } from "react";
 
 export default () => {
-  const handlesub = (e) => {
-    e.preventDefault();
-    console.log("I am called");
-  };
-
-  const doctor = {
+  const emptyDoctor = {
     id: -1,
     name: "",
     email: "",
     password: "",
     address: "",
     phone: "",
-    licence: "",
+    license: "",
     specialization: "",
     position: "",
+  };
+  const [searchId, setSearchId] = useState(1);
+  const [doctor, setDoctor] = useState(emptyDoctor);
+
+  const handlesub = (e) => {
+    e.preventDefault();
+    axios
+      .get(`${BACKEND_URL}/doctor/list?id=${searchId}`)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.doctor) {
+          setDoctor(res.data.doctor);
+        } else {
+          alert("No doctor found with this ID");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
   return (
     <>
@@ -52,7 +68,14 @@ export default () => {
               <InputGroup.Text>
                 <FontAwesomeIcon icon={faSearch} />
               </InputGroup.Text>
-              <Form.Control type="number" placeholder="001" />
+              <Form.Control
+                type="number"
+                placeholder="001"
+                value={searchId}
+                onChange={(e) => {
+                  setSearchId(e.target.value);
+                }}
+              />
               <Button
                 variant="info"
                 className="me-2"
