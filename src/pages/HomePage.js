@@ -80,6 +80,8 @@ import Tooltips from "./components/Tooltips";
 import Toasts from "./components/Toasts";
 import patients from "./patients";
 import medicines from "./medicines";
+import invoicePdf from "../components/invoicePdf.js";
+import invoiceHandler from "./invoiceHandler";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -406,7 +408,7 @@ export default () => (
     <RouteWithSidebarDoc
       exact
       path={Routes.MedicineShow.path}
-      component={MedicationList}
+      component={medicines}
     />
     <RouteWithSidebarDoc
       exact
@@ -469,6 +471,7 @@ export default () => (
       path={Routes.DocsChangelog.path}
       component={DocsChangelog}
     />
+    <RouteWithSidebar exact path = '/get/invoice' component = {invoiceHandler} />
 
     <Redirect to={Routes.Presentation.path} />
   </Switch>

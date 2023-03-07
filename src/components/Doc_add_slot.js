@@ -17,6 +17,7 @@ import moment from "moment";
 
 export const DocAddSlot = () => {
   const [birthday, setBirthday] = useState("");
+  const [quedate, setQuedate] = useState("");
   const [starttime, setStarttime] = useState("");
   const [endtime, setEndtime] = useState("");
   console.log(starttime);
@@ -93,7 +94,6 @@ export const DocAddSlot = () => {
                 <Form.Label>Start Time</Form.Label>
                 <InputGroup>
                   <InputGroup.Text>
-                    <FontAwesomeIcon icon={faCalendarAlt} />
                   </InputGroup.Text>
                   <Form.Control
                     required
@@ -112,7 +112,6 @@ export const DocAddSlot = () => {
                 <Form.Label>End Time</Form.Label>
                 <InputGroup>
                   <InputGroup.Text>
-                    <FontAwesomeIcon icon={faCalendarAlt} />
                   </InputGroup.Text>
                   <Form.Control
                     required
@@ -142,7 +141,7 @@ export const DocAddSlot = () => {
                 <Form.Label>Date</Form.Label>
                 <Datetime
                   timeFormat={false}
-                  onChange={(e) => setBirthday(e._d)}
+                  onChange={(e) => setQuedate(e._d)}
                   renderInput={(props, openCalendar) => (
                     <InputGroup>
                       <InputGroup.Text>
@@ -152,13 +151,11 @@ export const DocAddSlot = () => {
                         required
                         type="text"
                         value={
-                          birthday ? moment(birthday).format("DD/MM/YYYY") : ""
+                          quedate ? moment(quedate).format("DD/MM/YYYY") : ""
                         }
                         placeholder="dd/mm/yyyy"
                         onFocus={openCalendar}
-                        onChange={(e) => {
-                          setBirthday(e.target.value);
-                        }}
+                        onChange={() => {}}
                       />
                     </InputGroup>
                   )}

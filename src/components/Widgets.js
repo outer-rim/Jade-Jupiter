@@ -50,6 +50,15 @@ import {
   ButtonGroup,
 } from "@themesberg/react-bootstrap";
 import { Link } from "react-router-dom";
+import ReactPDF from '@react-pdf/renderer';
+import {
+    Document,
+    Page,
+    Text,
+    View,
+    StyleSheet,
+    PDFViewer,
+  } from "@react-pdf/renderer";
 
 import { Routes } from "../routes";
 import { pageVisits, pageTraffic, pageRanking } from "../data/tables";
@@ -61,6 +70,8 @@ import ProfileCover from "../assets/img/profile-cover.jpg";
 
 import teamMembers from "../data/teamMembers";
 import moment from "moment-timezone";
+import InvoicePdf from "./invoicePdf";
+import { Route } from "react-router-dom";
 
 export const ProfileCardWidget = (props) => {
   return (
@@ -108,7 +119,6 @@ export const ProfileDetailsWidget = (props) => {
 };
 
 export const TransactionsTable = () => {
-  const totalTransactions = transactions.length;
 
   const TableRow = (props) => {
     const { invoiceNumber, subscription, price, issueDate, dueDate, status } =
@@ -142,7 +152,7 @@ export const TransactionsTable = () => {
         <td>
           <Button
             as={Link}
-            to={Routes.Invoice.path}
+            to = {`/get/invoice`}
             variant=""
             className="fw-normal"
           >

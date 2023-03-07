@@ -133,6 +133,7 @@ export default (props = {}) => {
   const handleSignOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    localStorage.removeItem("profile");
     window.location.assign(`${FRONTEND_URL}/sign-in`);
   };
 
