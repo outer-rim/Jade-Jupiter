@@ -94,7 +94,6 @@ export const DocsignUp = (props) => {
                 <Form.Control
                   required
                   type="password"
-                  defaultValue={props.doctor.password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>

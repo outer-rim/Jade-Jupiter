@@ -3,10 +3,16 @@ import { BACKEND_URL } from "../constants.js";
 import AugmentedAxios from "../utils/augmentedAxios";
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-import { Col, Row, Card, Form, Button, InputGroup } from '@themesberg/react-bootstrap';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  Col,
+  Row,
+  Card,
+  Form,
+  Button,
+  InputGroup,
+} from "@themesberg/react-bootstrap";
 
 export const OpsignUp = (props) => {
   const [id, setId] = useState(0);
@@ -37,11 +43,10 @@ export const OpsignUp = (props) => {
       });
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("I am called");
-  }
+  };
 
   return (
     <Card border="light" className="bg-white shadow-sm mb-4">
@@ -49,22 +54,36 @@ export const OpsignUp = (props) => {
         <h5 className="mb-4">Operator Registration</h5>
         <Form>
           <Row>
-          <Col md={5} className="mb-3">
+            <Col md={5} className="mb-3">
               <Form.Group id="firstName">
                 <Form.Label>Operator Name</Form.Label>
-                <Form.Control required type="text" placeholder="Enter your first name" onChange={(e) => setName(e.target.value)} />
+                <Form.Control
+                  required
+                  type="text"
+                  defaultValue={props.operator.name}
+                  placeholder="Enter your first name"
+                  onChange={(e) => setName(e.target.value)}
+                />
               </Form.Group>
             </Col>
             <Col md={3} className="mb-3">
               <Form.Group id="firstName">
                 <Form.Label>Operator Email</Form.Label>
-                <Form.Control required type="email" placeholder="abc@abc.com" onChange={(e) => setEmail(e.target.value)} />
+                <Form.Control
+                  required
+                  type="email"
+                  defaultValue={props.operator.email}
+                  placeholder="abc@abc.com"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">
               <Form.Group id="age">
                 <Form.Label>Operator ID</Form.Label>
-                <small style={{color: "red", fontWeight: "bold"}}>&nbsp;(Ignore For New Registrations)</small>
+                <small style={{ color: "red", fontWeight: "bold" }}>
+                  &nbsp;(Ignore For New Registrations)
+                </small>
                 <Form.Control required type="number" placeholder="35" />
               </Form.Group>
             </Col>
@@ -73,19 +92,35 @@ export const OpsignUp = (props) => {
             <Col md={4} className="mb-3">
               <Form.Group id="age">
                 <Form.Label>Password</Form.Label>
-                <Form.Control required type="password" onChange={(e) => setPassword(e.target.value)} />
+                <Form.Control
+                  required
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">
               <Form.Group id="gender">
                 <Form.Label>Role</Form.Label>
-                <Form.Control required type="text" placeholder="front-desk" onChange={(e) => setRole(e.target.value)} />
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="front-desk"
+                  defaultValue={props.operator.role}
+                  onChange={(e) => setRole(e.target.value)}
+                />
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">
               <Form.Group id="phone">
                 <Form.Label>Phone</Form.Label>
-                <Form.Control required type="number" placeholder="+91 12345 67890" onChange={(e) => setPhone(e.target.value)}/>
+                <Form.Control
+                  required
+                  type="number"
+                  placeholder="+91 12345 67890"
+                  defaultValue={props.operator.phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
               </Form.Group>
             </Col>
           </Row>
@@ -95,13 +130,26 @@ export const OpsignUp = (props) => {
             <Col sm={9} className="mb-3">
               <Form.Group id="address">
                 <Form.Label>Address</Form.Label>
-                <Form.Control as = "textarea" required type="text" placeholder="Enter address of the operator" onChange={(e) => setAddress(e.target.value)} />
+                <Form.Control
+                  as="textarea"
+                  required
+                  type="text"
+                  placeholder="Enter address of the operator"
+                  defaultValue={props.operator.address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
               </Form.Group>
             </Col>
           </Row>
           <div className="mt-3">
-          <span><Button variant="primary" type="submit" onClick = {handleRegister}>Register</Button> &nbsp; &nbsp;
-            <Button variant="primary" type="submit" onClick = {handleSubmit}>Update</Button>
+            <span>
+              <Button variant="primary" type="submit" onClick={handleRegister}>
+                Register
+              </Button>{" "}
+              &nbsp; &nbsp;
+              <Button variant="primary" type="submit" onClick={handleSubmit}>
+                Update
+              </Button>
             </span>
           </div>
         </Form>
