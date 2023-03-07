@@ -82,23 +82,23 @@ export default () => {
       AugmentedAxios.get(`${BACKEND_URL}/auth/verify`)
         .then((response) => {
           console.log(response);
-          localStorage.setItem("role", JSON.stringify(response.data.user.role));
-          switch (response.data.user.role) {
-            case "admin":
-              window.location.assign(`${FRONTEND_URL}/dashboardadmin`);
-              break;
-            case "data_entry":
-              window.location.assign(`${FRONTEND_URL}/dashboard2`);
-              break;
-            case "front_desk":
-              window.location.assign(`${FRONTEND_URL}/dashboard`);
-              break;
-            case "doctor":
-              window.location.assign(`${FRONTEND_URL}/dashboarddoctor`);
-              break;
-            default:
-              window.location.assign(`${FRONTEND_URL}/`);
-          }
+          // localStorage.setItem("role", JSON.stringify(response.data.user.role));
+          // switch (response.data.user.role) {
+          //   case "admin":
+          //     window.location.assign(`${FRONTEND_URL}/dashboardadmin`);
+          //     break;
+          //   case "data_entry":
+          //     window.location.assign(`${FRONTEND_URL}/dashboard2`);
+          //     break;
+          //   case "front_desk":
+          //     window.location.assign(`${FRONTEND_URL}/dashboard`);
+          //     break;
+          //   case "doctor":
+          //     window.location.assign(`${FRONTEND_URL}/dashboarddoctor`);
+          //     break;
+          //   default:
+          //     window.location.assign(`${FRONTEND_URL}/`);
+          // }
         })
         .catch((err) => {
           console.log(err);

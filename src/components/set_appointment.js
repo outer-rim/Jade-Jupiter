@@ -7,7 +7,10 @@ import { Col, Row, Card, Form, Button, InputGroup } from '@themesberg/react-boot
 
 
 export const AppointmentForm = () => {
-  const [birthday, setBirthday] = useState("");
+  const [patientId, setPatientId] = useState(0);
+  const [doctorId, setDoctorId] = useState(0);
+  const [slotId, setSlotId] = useState(0);
+
   const [name, setName] = useState("");
   console.log(name);
 

@@ -38,11 +38,13 @@ export default () => {
       window.alert("Please login first");
       window.location.assign(`${FRONTEND_URL}/sign-in`);
     }
-    AugmentedAxios.get(
-      `${BACKEND_URL}/auth/details?email=${profile.email}`
-    ).then((response) => {
-      setProfile(response.data.user);
-    });
+    AugmentedAxios.get(`${BACKEND_URL}/auth/details`)
+      .then((response) => {
+        setProfile(response.data.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (

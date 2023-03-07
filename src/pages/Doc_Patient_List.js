@@ -12,11 +12,11 @@ export default () => {
 
   useEffect(() => {
     const docId = JSON.parse(localStorage.getItem("profile")).id;
-    if (!docId) alert("Please login as a doctor");
+    if (!docId) alert("Please login");
 
-    AugmentedAxios.get(`${BACKEND_URL}/patient/treated?doctor_id=${docId}`)
+    AugmentedAxios.get(`${BACKEND_URL}/treatment/list/doctor?id=${docId}`)
       .then((res) => {
-        setTreatedPatients(res.data.patients);
+        setTreatedPatients(res.data.treatments);
       })
       .catch((e) => {
         console.log(e);
@@ -25,7 +25,8 @@ export default () => {
 
   useEffect(() => {
     const docId = JSON.parse(localStorage.getItem("profile")).id;
-    if (!docId) alert("Please login as a doctor");
+    if (!docId) alert("Please login");
+
     AugmentedAxios.get(`${BACKEND_URL}/appointment/list/doctor?id=${docId}`)
       .then((res) => {
         setAppointPatients(res.data.appointments);

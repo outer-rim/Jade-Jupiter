@@ -35,8 +35,9 @@ AugmentedAxios.interceptors.response.use(
         originalConfig._retry = true;
         try {
           // store the access_token and set into the header
-          console.log("refreshing token");
           window.alert("Session expired. Please login again");
+          localStorage.removeItem("token");
+
           window.location.assign(`${FRONTEND_URL}/sign-in`);
           return AugmentedAxios(originalConfig);
         } catch (_error) {

@@ -60,6 +60,7 @@ import Profile1 from "../assets/img/team/profile-picture-1.jpg";
 import ProfileCover from "../assets/img/profile-cover.jpg";
 
 import teamMembers from "../data/teamMembers";
+import moment from "moment-timezone";
 
 export const ProfileCardWidget = (props) => {
   return (
@@ -693,35 +694,26 @@ export const ProcedureTable = (props) => {
   );
 };
 
-export const SlotTable = () => {
+export const SlotTable = (props) => {
   const TableRow = (props) => {
-    const {
-      country,
-      countryImage,
-      overallRank,
-      overallRankChange,
-      travelRank,
-      travelRankChange,
-      widgetsRank,
-      widgetsRankChange,
-    } = props;
-
     return (
       <tr>
         <td className="border-0">
           <div>
-            <span className="h6">123</span>
+            <span className="h6">{props.id}</span>
           </div>
         </td>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{props.starttime}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{props.endtime}</td>
       </tr>
     );
   };
+
+  const { slot } = props;
 
   return (
     <Card
@@ -741,7 +733,7 @@ export const SlotTable = () => {
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map((r) => (
+            {slot.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>
@@ -751,38 +743,39 @@ export const SlotTable = () => {
   );
 };
 
-export const SlotTableDoc = () => {
+export const SlotTableDoc = (props) => {
   const TableRow = (props) => {
-    const {
-      country,
-      countryImage,
-      overallRank,
-      overallRankChange,
-      travelRank,
-      travelRankChange,
-      widgetsRank,
-      widgetsRankChange,
-    } = props;
-
+    const date = moment(props.starttime).format("DD/MM/YYYY");
+    const start = moment(props.starttime).format("hh:mm A");
+    const end = moment(props.endtime).format("hh:mm A");
     return (
       <tr>
         <td className="border-0">
           <div>
-            <span className="h6">123</span>
+            <span className="h6">{props.id}</span>
           </div>
         </td>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{date}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
-        <td className="fw-bold border-0">
-          {overallRank % 2 ? "Booked" : "Available"}
+        <td className="border-0">
+          <div>
+            <span className="h6">{start}</span>
+          </div>
         </td>
+        <td className="border-0">
+          <div>
+            <span className="h6">{end}</span>
+          </div>
+        </td>
+        <td className="fw-bold border-0">{"Available"}</td>
       </tr>
     );
   };
+
+  const { slot } = props;
 
   return (
     <Card
@@ -797,13 +790,14 @@ export const SlotTableDoc = () => {
           <thead className="thead-light">
             <tr>
               <th className="border-0">Slot ID</th>
+              <th className="border-0">Date</th>
               <th className="border-0">Start Time</th>
               <th className="border-0">End Time</th>
               <th className="border-0">Booking Status</th>
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map((r) => (
+            {slot.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>
