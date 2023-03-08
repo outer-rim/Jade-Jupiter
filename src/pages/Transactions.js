@@ -54,7 +54,7 @@ export default () => {
         </div>
       </div>
 
-      <TransactionsTable discharged={discharged}/>
+      <TransactionsTable discharged={discharged.reverse()}/>
     </>
   );
 };
