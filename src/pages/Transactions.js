@@ -12,7 +12,7 @@ export default () => {
   const [discharged, setDischarged] = useState([]);
   useEffect(() => {
     AugmentedAxios.get(`${BACKEND_URL}/stay/getalldischarged`).then((res) => {
-      setDischarged(res.data);
+      setDischarged(res.data.reverse());
     });
   }, []);
   const [id, setId] = useState(0);
@@ -54,7 +54,7 @@ export default () => {
         </div>
       </div>
 
-      <TransactionsTable discharged={discharged.reverse()}/>
+      <TransactionsTable discharged={discharged}/>
     </>
   );
 };
