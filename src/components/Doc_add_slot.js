@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Datetime from "react-datetime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import {SlotTableDoc} from "./Widgets";
+import "./styles.css";
 import {
   Col,
   Row,
@@ -10,35 +12,50 @@ import {
   Form,
   Button,
   InputGroup,
+  Modal
 } from "@themesberg/react-bootstrap";
 import AugmentedAxios from "../utils/augmentedAxios";
 import { BACKEND_URL } from "../constants";
 import moment from "moment";
 
 export const DocAddSlot = () => {
-  const [birthday, setBirthday] = useState("");
+  const [date, setDate] = useState("");
   const [quedate, setQuedate] = useState("");
   const [starttime, setStarttime] = useState("");
   const [endtime, setEndtime] = useState("");
-  console.log(starttime);
-
-  const [name, setName] = useState("");
-  console.log(name);
+  const [slotspec, setSlotspec] = useState([]);
+  const [showDefault, setShowDefault] = useState(false);
+  const handleClose = () => setShowDefault(false);
+  const doctor_id = JSON.parse(localStorage.getItem("profile")).id;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let qdate = moment(quedate).format("YYYY-MM-DD").toString();
+    qdate += `T00:00`;
+    AugmentedAxios.post(`${BACKEND_URL}/slot/listspec`, {
+      doctor_id,
+      quedate: qdate,
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          setSlotspec(response.data.slots);
+          setShowDefault(true);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const handleAdd = (e) => {
     e.preventDefault();
 
-    let start = moment(birthday).format("YYYY-MM-DD").toString();
+    let start = moment(date).format("YYYY-MM-DD").toString();
     start += `T${starttime}`;
 
-    let end = moment(birthday).format("YYYY-MM-DD").toString();
+    let end = moment(date).format("YYYY-MM-DD").toString();
     end += `T${endtime}`;
     const doctor_id = JSON.parse(localStorage.getItem("profile")).id;
-    console.log(doctor_id);
 
     AugmentedAxios.post(`${BACKEND_URL}/slot/add`, {
       doctor_id,
@@ -64,11 +81,11 @@ export const DocAddSlot = () => {
         <Form>
           <Row>
             <Col md={4} className="mb-3">
-              <Form.Group id="birthday">
+              <Form.Group id="date">
                 <Form.Label>Date</Form.Label>
                 <Datetime
                   timeFormat={false}
-                  onChange={(e) => setBirthday(e._d)}
+                  onChange={(e) => setDate(e._d)}
                   renderInput={(props, openCalendar) => (
                     <InputGroup>
                       <InputGroup.Text>
@@ -78,7 +95,7 @@ export const DocAddSlot = () => {
                         required
                         type="text"
                         value={
-                          birthday ? moment(birthday).format("DD/MM/YYYY") : ""
+                          date ? moment(date).format("DD/MM/YYYY") : ""
                         }
                         placeholder="dd/mm/yyyy"
                         onFocus={openCalendar}
@@ -137,7 +154,7 @@ export const DocAddSlot = () => {
           <Row>
             <h5 className="mb-4">Get Slot Details</h5>
             <Col md={6} className="mb-3">
-              <Form.Group id="birthday">
+              <Form.Group id="qdate">
                 <Form.Label>Date</Form.Label>
                 <Datetime
                   timeFormat={false}
@@ -165,9 +182,20 @@ export const DocAddSlot = () => {
           </Row>
           <div className="mt-3">
             <span>
-              <Button variant="primary" type="submit" onClick={handleSubmit}>
-                Get All Slots
-              </Button>
+              <React.Fragment>
+                <Button variant="primary" type="submit" onClick={handleSubmit}>Get All Slots</Button>
+                <Modal as={Modal.Dialog} contentClassName="custom-modal-style" centered show={showDefault} onHide={handleClose}>
+                  <Modal.Header>
+                    <Button variant="close" aria-label="Close" onClick={handleClose} />
+                  </Modal.Header>
+                  <Modal.Body>
+                    <SlotTableDoc slot = {slotspec} />
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" className = "ms-auto" onClick={handleClose}>Close</Button>
+                  </Modal.Footer>
+                </Modal>
+              </React.Fragment>
             </span>
           </div>
         </Form>

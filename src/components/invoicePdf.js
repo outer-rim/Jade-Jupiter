@@ -38,9 +38,16 @@ const styles = StyleSheet.create({
     subcost: {
         fontSize: 15,
         textAlign: 'right',
-        margin: 15,
+        marginTop: 15,
+        marginBottom: 4,
         fontFamily: 'Times-Bold'
     },
+    subsig: {
+      fontSize: 11,
+      textAlign: 'right',
+      margin: 3,
+      fontFamily: 'Times-Roman'
+  },
     text: {
       margin: 6,
       fontSize: 12,
@@ -136,7 +143,9 @@ export default (props) => {
       }
 
       <Text style={styles.subcost}>Total Cost : Rs. {data.totalcost}</Text>
-      <Text style={styles.subtitle}>Thank You ! Visit Again</Text>
+      <Text style={styles.subcost}>--------------------------</Text>
+      <Text style={styles.subsig}>(Signature and Seal)</Text>
+      <Text style={styles.subtitle}>Thank You ! Best Wishes</Text>
       <Text style={styles.subtitle}>Emergency: 1800-8908-789</Text>
       <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
         `${pageNumber} / ${totalPages}`
