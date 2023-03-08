@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BACKEND_URL } from "../constants";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCog, faHome, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,12 @@ import { TransactionsTable } from "../components/Widgets";
 import AugmentedAxios from "../utils/augmentedAxios";
 
 export default () => {
+  const [discharged, setDischarged] = useState([]);
+  useEffect(() => {
+    AugmentedAxios.get(`${BACKEND_URL}/stay/getalldischarged`).then((res) => {
+      setDischarged(res.data);
+    });
+  }, []);
   const [id, setId] = useState(0);
   const handlesub = (e) => {
     e.preventDefault();
@@ -48,7 +54,7 @@ export default () => {
         </div>
       </div>
 
-      <TransactionsTable />
+      <TransactionsTable discharged={discharged}/>
     </>
   );
 };

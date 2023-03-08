@@ -471,7 +471,7 @@ export default () => (
       path={Routes.DocsChangelog.path}
       component={DocsChangelog}
     />
-    <RouteWithSidebar exact path = '/get/invoice' component = {invoiceHandler} />
+    <RouteWithSidebar exact path = '/get/invoice/:id' component = {invoiceHandler} />
 
     <Redirect to={Routes.Presentation.path} />
   </Switch>

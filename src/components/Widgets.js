@@ -118,41 +118,35 @@ export const ProfileDetailsWidget = (props) => {
   );
 };
 
-export const TransactionsTable = () => {
-
+export const TransactionsTable = (props) => {
+  const { discharged } = props;
+  let date1, date2;
   const TableRow = (props) => {
-    const { invoiceNumber, subscription, price, issueDate, dueDate, status } =
-      props;
-    const statusVariant =
-      status === "Paid"
-        ? "success"
-        : status === "Due"
-        ? "warning"
-        : status === "Canceled"
-        ? "danger"
-        : "primary";
-
+    const date = moment(props.starttime).format("DD/MM/YYYY");
+    const start = moment(props.starttime).format("hh:mm:ss A");
+    const edate = moment(props.endtime).format("DD/MM/YYYY");
+    const end = moment(props.endtime).format("hh:mm:ss A");
     return (
       <tr>
         <td>
-          <span className="fw-normal">{subscription}</span>
+          <span className="fw-normal">{props.patient_id}</span>
         </td>
         <td>
-          <span className="fw-normal">{subscription}</span>
+          <span className="fw-normal">{props.name}</span>
         </td>
         <td>
-          <span className="fw-normal">{issueDate}</span>
+          <span className="fw-normal">{start}, {date}</span>
         </td>
         <td>
-          <span className="fw-normal">{dueDate}</span>
+          <span className="fw-normal">{end}, {edate}</span>
         </td>
         <td>
-          <span className="fw-normal">${parseFloat(price).toFixed(2)}</span>
+          <span className="fw-normal">{props.phone}</span>
         </td>
         <td>
           <Button
             as={Link}
-            to = {`/get/invoice`}
+            to = {`/get/invoice/${props.id}`}
             variant=""
             className="fw-normal"
           >
@@ -180,12 +174,12 @@ export const TransactionsTable = () => {
                 <th className="border-bottom">Patient Name</th>
                 <th className="border-bottom">Admit Date</th>
                 <th className="border-bottom">Discharge Date</th>
-                <th className="border-bottom">Total Amount</th>
+                <th className="border-bottom">Phone</th>
                 <th className="border-bottom">Download Invoice</th>
               </tr>
             </thead>
             <tbody>
-              {transactions.map((t) => (
+              {discharged.map((t) => (
                 <TableRow key={`transaction-${t.invoiceNumber}`} {...t} />
               ))}
             </tbody>
@@ -780,7 +774,11 @@ export const SlotTableDoc = (props) => {
             <span className="h6">{end}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{"Available"}</td>
+        <td className="fw-bold border-0">{props.status ? (
+            <span style={{ color: "green" }}>Available</span>
+          ) : (
+            <span style={{ color: "red" }}>Booked</span>
+          )}</td>
       </tr>
     );
   };

@@ -107,7 +107,7 @@ export default () => {
             </Col>
             <Col md={3} className="mb-3">
             <Form.Group id="date">
-                <Form.Label>Date</Form.Label>
+                <Form.Label>Procedure Date</Form.Label>
                 <Datetime
                   timeFormat={false}
                   onChange={(e) => setDate(e._d)}

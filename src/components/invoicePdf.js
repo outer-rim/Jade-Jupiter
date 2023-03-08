@@ -10,6 +10,7 @@ import {
   } from "@react-pdf/renderer";
 import { Image } from '@react-pdf/renderer';
 import ghl from '../assets/img/ghl.jpg';
+import moment from 'moment';
 
 // Create styles
 const styles = StyleSheet.create({
@@ -73,7 +74,16 @@ const styles = StyleSheet.create({
   });
   
 
-export default (data) => {
+export default (props) => {
+  const {data} = props;
+  const date1 = moment(data.admit_date).format("DD/MM/YYYY");
+  const start1 = moment(data.admit_date).format("hh:mm A");
+  const date2 = moment(data.discharge_date).format("DD/MM/YYYY");
+  const start2 = moment(data.discharge_date).format("hh:mm A");
+  const date3 = moment(data.procedure_date).format("DD/MM/YYYY");
+  const start3 = moment(data.procedure_date).format("hh:mm A");
+  const date4 = moment(data.test_date).format("DD/MM/YYYY");
+  const start4 = moment(data.test_date).format("hh:mm A");
     return (
         <PDFViewer style={styles.viewer}>
       <Document>
@@ -88,34 +98,44 @@ export default (data) => {
         src={ghl}
       />
       <Text style={styles.subtitle}>Patient Details</Text>
-      <Text style={styles.text}>Patient ID : 50</Text>
-      <Text style={styles.text}>Patient Name : John Smith</Text>
-      <Text style={styles.text}>Age : 50</Text>
-      <Text style={styles.text}>Gender : Male</Text>
-      <Text style={styles.text}>Doctor Name : Dr. John Pareto</Text>
+      <Text style={styles.text}>Patient ID : {data.patient_id}</Text>
+      <Text style={styles.text}>Patient Name : {data.patient_name}</Text>
+      <Text style={styles.text}>Age : {data.patient_age}</Text>
+      <Text style={styles.text}>Gender : {data.patient_gender}</Text>
+      <Text style={styles.text}>Doctor Name : {data.doctor_name}</Text>
 
       <Text style={styles.subtitle}>Treatment Details</Text>
-      <Text style={styles.text}>Illness Details : dshcbdhcbhhcbhdcbdsjbcbsccbdsncdsb</Text>
-      <Text style={styles.text}>Admit Date : 14/15/23</Text>
-      <Text style={styles.text}>Discharge Date : 14/15/23</Text>
-      <Text style={styles.text}>Stay Cost : Rs. 15000</Text>
+      <Text style={styles.text}>Illness Details : {data.illness_details}</Text>
+      <Text style={styles.text}>Admit Date : {start1}, {date1}</Text>
+      <Text style={styles.text}>Discharge Date : {start2}, {date2}</Text>
+      <Text style={styles.text}>Stay Cost (Per Day) : Rs. {data.room_cost}</Text>
 
       <Text style={styles.subtitle}>Procedure Details</Text>
-      <Text style={styles.text}>Procedure Name : Bypass Surgery</Text>
-      <Text style={styles.text}>Procedure Cost : 14/15/23</Text>
-      <Text style={styles.text}>Procedure Date : 14/15/23</Text>
+      <Text style={styles.text}>Procedure Name : {data.procedure_name}</Text>
+      <Text style={styles.text}>Procedure Cost : {data.procedure_cost}</Text>
+      <Text style={styles.text}>Procedure Date : {start3}, {date3}</Text>
 
       <Text style={styles.subtitle}>Test Details</Text>
-      <Text style={styles.text}>Test Name : Bypass Surgery</Text>
-      <Text style={styles.text}>test Date : 14/15/23</Text>
-      <Text style={styles.text}>Cost : 14/15/23</Text>
+      <Text style={styles.text}>Test Name : {data.test_name}</Text>
+      <Text style={styles.text}>Test Date : {start4}, {date4}</Text>
+      <Text style={styles.text}>Cost : {data.test_cost}</Text>
 
       <Text style={styles.subtitle}>Medication Details</Text>
-      <Text style={styles.text}>Medicine Name : Paracetamol</Text>
-      <Text style={styles.text}>Medicine Dose : 6mg</Text>
-      <Text style={styles.text}>Cost : 100</Text>
+      { data.medication && 
+        data.medication.map(function(medication) {
+          return(
+            <>
+          <Text style={styles.text}>Medicine Name : {medication.name}</Text>
+          <Text style={styles.text}>Medicine Brand : {medication.brand}</Text>
+          <Text style={styles.text}>Medicine Dose : {medication.dose_amount}</Text>
+          <Text style={styles.text}>Medicine Cost : {medication.cost}</Text>
+          <Text style={styles.text}> </Text>
+          </>
+          )
+        })
+      }
 
-      <Text style={styles.subcost}>Total Cost : Rs. 50000</Text>
+      <Text style={styles.subcost}>Total Cost : Rs. {data.totalcost}</Text>
       <Text style={styles.subtitle}>Thank You ! Visit Again</Text>
       <Text style={styles.subtitle}>Emergency: 1800-8908-789</Text>
       <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
