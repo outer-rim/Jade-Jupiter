@@ -4,6 +4,8 @@ import Datetime from "react-datetime";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Card, Form, Button, InputGroup } from '@themesberg/react-bootstrap';
+import AugmentedAxios from "../utils/augmentedAxios";
+import { BACKEND_URL } from "../constants";
 
 
 export const AppointmentForm = () => {
@@ -11,12 +13,19 @@ export const AppointmentForm = () => {
   const [doctorId, setDoctorId] = useState(0);
   const [slotId, setSlotId] = useState(0);
 
-  const [name, setName] = useState("");
-  console.log(name);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("I am called");
+    AugmentedAxios.post(`${BACKEND_URL}/appointment/create`, {
+      patient_id:patientId,
+      doctor_id:doctorId,
+      slot_id:slotId
+    }).then((result) => {
+      window.alert("Appointment Set Successfully");
+      window.location.reload();
+    }).catch((e) => {
+      console.log(e);
+    })
   }
 
   return (
@@ -28,19 +37,19 @@ export const AppointmentForm = () => {
             <Col md={6} className="mb-3">
               <Form.Group id="firstName">
                 <Form.Label>Patient ID</Form.Label>
-                <Form.Control required type="number" placeholder="999" onChange={(e) => setName(e.target.value)} />
+                <Form.Control required type="number" placeholder="999" onChange={(e) => setPatientId(e.target.value)} />
               </Form.Group>
             </Col>
             <Col md={6} className="mb-3">
               <Form.Group id="firstName">
                 <Form.Label>Doctor ID</Form.Label>
-                <Form.Control required type="number" placeholder="001" onChange={(e) => setName(e.target.value)} />
+                <Form.Control required type="number" placeholder="001" onChange={(e) => setDoctorId(e.target.value)} />
               </Form.Group>
             </Col>
             <Col md={6} className="mb-3">
               <Form.Group id="firstName">
                 <Form.Label>Slot ID</Form.Label>
-                <Form.Control required type="number" placeholder="123" onChange={(e) => setName(e.target.value)} />
+                <Form.Control required type="number" placeholder="123" onChange={(e) => setSlotId(e.target.value)} />
               </Form.Group>
             </Col>
             </Row>

@@ -700,6 +700,9 @@ export const ProcedureTable = (props) => {
 
 export const SlotTable = (props) => {
   const TableRow = (props) => {
+    const date = moment(props.starttime).format("DD/MM/YYYY");
+    const start = moment(props.starttime).format("hh:mm A");
+    const end = moment(props.endtime).format("hh:mm A");
     return (
       <tr>
         <td className="border-0">
@@ -709,10 +712,29 @@ export const SlotTable = (props) => {
         </td>
         <td className="border-0">
           <div>
-            <span className="h6">{props.starttime}</span>
+            <span className="h6">{props.doctor_id}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{props.endtime}</td>
+        <td className="border-0">
+          <div>
+            <span className="h6">{date}</span>
+          </div>
+        </td>
+        <td className="border-0">
+          <div>
+            <span className="h6">{start}</span>
+          </div>
+        </td>
+        <td className="border-0">
+          <div>
+            <span className="h6">{end}</span>
+          </div>
+        </td>
+        <td className="fw-bold border-0">{props.status ? (
+            <span style={{ color: "green" }}>Available</span>
+          ) : (
+            <span style={{ color: "red" }}>Booked</span>
+          )}</td>
       </tr>
     );
   };
@@ -732,8 +754,11 @@ export const SlotTable = (props) => {
           <thead className="thead-light">
             <tr>
               <th className="border-0">Slot ID</th>
+              <th className="border-0">Doctor ID</th>
+              <th className="border-0">Date</th>
               <th className="border-0">Start Time</th>
               <th className="border-0">End Time</th>
+              <th className="border-0">Status</th>
             </tr>
           </thead>
           <tbody>

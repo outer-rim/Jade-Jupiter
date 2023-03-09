@@ -1,6 +1,6 @@
 import { DocQueForm } from "../components/doctor_appointment_query";
 import { AppointmentForm } from "../components/set_appointment";
-import { PatientTable, RoomTable, SlotTable } from "../components/Widgets";
+import { PatientTable, RoomTable, SlotTable, SlotTableDoc } from "../components/Widgets";
 import {
   Col,
   Row,
