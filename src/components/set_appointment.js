@@ -31,10 +31,10 @@ export const AppointmentForm = () => {
       \tPatient ID: ${result.data.patient.id}\n
       \tPatient Name: ${result.data.patient.name}\n
     \tSlot Details:
-      \t\tSlot ID: ${result.data.slot_id}
-      \t\tDate: ${date}
-      \t\tStart Time: ${start}
-      \t\tEnd Time: ${end}
+      \t\tSlot ID: ${result.data.slot_id}\n
+      \t\tDate: ${date}\n
+      \t\tStart Time: ${start}\n
+      \t\tEnd Time: ${end}\n
     \tThe appoinment is scheduled at your cabin.`;
 
       var values = {

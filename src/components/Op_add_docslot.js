@@ -4,6 +4,7 @@ import Datetime from "react-datetime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import {SlotTableDoc} from "./Widgets";
+import emailjs from "@emailjs/browser";
 import "./styles.css";
 import {
   Col,
@@ -33,7 +34,7 @@ export const OpAddDocSlot = () => {
 
   const handleAdd = (e) => {
     e.preventDefault();
-
+    setShowDefault(false);
     let start = moment(date).format("YYYY-MM-DD").toString();
     start += `T${starttime}`;
 
@@ -42,6 +43,7 @@ export const OpAddDocSlot = () => {
     const op_phone = JSON.parse(localStorage.getItem("profile")).phone;
     const op_name = JSON.parse(localStorage.getItem("profile")).name;
     const op_email = JSON.parse(localStorage.getItem("profile")).email;
+    const op_id = JSON.parse(localStorage.getItem("profile")).id;
 
     AugmentedAxios.post(`${BACKEND_URL}/slot/add`, {
       doctor_id,
@@ -50,21 +52,36 @@ export const OpAddDocSlot = () => {
     })
       .then((result) => {
         if (result.status === 200) {
-        const date = moment(result.data.appointment.starttime).format("DD/MM/YYYY");
-        const start = moment(result.data.appointment.starttime).format("hh:mm A");
-        const end = moment(result.data.appointment.endtime).format("hh:mm A");
+        const date = moment(result.data.starttime).format("DD/MM/YYYY");
+        const start = moment(result.data.starttime).format("hh:mm A");
+        const end = moment(result.data.endtime).format("hh:mm A");
         const slot_id = result.data.id;
+        const data = `A new slot has been created for you\n
+      The details of the slot are as follows:\n
+    \tSlot Details:
+      \t\tSlot ID: ${result.data.slot_id}\n
+      \t\tDate: ${date}\n
+      \t\tStart Time: ${start}\n
+      \t\tEnd Time: ${end}\n
+    \t Details of the operator (who created the slot):\n
+        \t\t Operator ID: ${op_id}\n
+        \t\t Operator Name: ${op_name}\n
+        \t\t Operator Email: ${op_email}\n
+        \t\t Operator Phone No. : ${op_phone}\n
+        In case of any discrepancy or query please contact the operator or the global hospitals team`;
         let values = {
-            op_phone,
-            op_email,
-            op_name,
-            date,
-            starttime,
-            end,
-            slot_id
+            doc_email:result.data.doctor.email,
+            to_name: result.data.doctor.name,
+            subject: "New Slot Created",
+            data: data
         }
-          window.alert("Slot Added Successfully");
-          window.location.reload();
+        emailjs.send('service_z01kskn', 'template_htrairc', values, 'nXuDLCoHJrKB4wH7g').then(
+            (result) => {
+              console.log(result.text);
+              window.alert("Slot Added Successfully");
+              window.location.reload();
+            }
+        ).catch((e) => console.log(e));
         }
       })
       .catch((e) => {
@@ -75,7 +92,7 @@ export const OpAddDocSlot = () => {
   return (
     <Card border="light" className="bg-white shadow-sm mb-4">
       <Card.Body>
-        <h1 className="text-center">Add Slot</h1>
+        <h3 className="text-center">Add Slot (On Emergency Only)</h3>
         <h5 className="mb-4">Add Slot Details</h5>
         <Form>
           <Row>
@@ -163,7 +180,7 @@ export const OpAddDocSlot = () => {
                        <br /> <br />An email will be sent to the doctor about who has set the appointment.<br /> Incase of any discrepancy please contact the hospital authority</p>
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button variant="secondary" className = "ms-auto" onClick={handleClose}>Add Slot</Button>
+                    <Button variant="secondary" className = "ms-auto" onClick={handleAdd}>Add Slot</Button>
                   </Modal.Footer>
                 </Modal>
               </React.Fragment>
