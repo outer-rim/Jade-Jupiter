@@ -32,10 +32,10 @@ export default () => {
     <>
       <h1 className="text-center">Manage Appointments</h1>
       <Row>
-        <Col xs={12} xl={6}>
+        <Col xs={12} xl={8}>
           <OpAddDocSlot slot={slot} />
         </Col>
-        <Col xs={12} xl={6}>
+        <Col xs={12} xl={4}>
           <AppointmentForm />
         </Col>
       </Row>

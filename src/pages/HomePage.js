@@ -266,7 +266,14 @@ export default () => (
       component={Transactions}
     />
     <RouteWithSidebar exact path={Routes.Settings.path} component={Settings} />
+    <RouteWithSidebar exact path={Routes.AdmPatients.path} component={AdmPatients} />
     <RouteWithSidebar exact path={Routes.FDAdmit.path} component={FDAdmit} />
+    <RouteWithSidebar exact path={Routes.AdmPatients.path} component={AdmPatients} />
+    <RouteWithSidebar
+      exact
+      path={Routes.Patients.path}
+      component={patients}
+    />
     <RouteWithSidebar
       exact
       path={Routes.FDAppoint.path}
@@ -376,9 +383,11 @@ export default () => (
 
     <RouteWithSidebarData
       exact
-      path={Routes.Patients.path}
+      path={Routes.Patients.path2}
       component={patients}
     />
+
+    <RouteWithSidebarData exact path={Routes.AdmPatients.path2} component={AdmPatients} />
 
     {/*Doctors*/}
     <RouteWithSidebarDoc

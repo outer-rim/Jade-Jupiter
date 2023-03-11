@@ -14,7 +14,7 @@ export default () => {
     const docId = JSON.parse(localStorage.getItem("profile")).id;
     if (!docId) alert("Please login");
 
-    AugmentedAxios.get(`${BACKEND_URL}/treatment/list/doctor?id=${docId}`)
+    AugmentedAxios.get(`${BACKEND_URL}/patient/treatmentlist?doctor_id=${docId}`)
       .then((res) => {
         setTreatedPatients(res.data.treatments);
       })
@@ -27,7 +27,7 @@ export default () => {
     const docId = JSON.parse(localStorage.getItem("profile")).id;
     if (!docId) alert("Please login");
 
-    AugmentedAxios.get(`${BACKEND_URL}/appointment/list/doctor?id=${docId}`)
+    AugmentedAxios.get(`${BACKEND_URL}/patient/appointmentlist?doctor_id=${docId}`)
       .then((res) => {
         setAppointPatients(res.data.appointments);
       })

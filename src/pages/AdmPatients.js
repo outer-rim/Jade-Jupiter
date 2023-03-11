@@ -1,4 +1,4 @@
-import { AdmittedPatientTable, DoctorTable } from "../components/Widgets";
+import { AdmittedPatientTable } from "../components/Widgets";
 import {
   Col,
   Row,
@@ -9,20 +9,20 @@ import {
 import React from "react";
 import { useState, useEffect } from "react";
 import { BACKEND_URL } from "../constants.js";
-import axios from "axios";
+import AugmentedAxios from "../utils/augmentedAxios";
 
 export default () => {
-  const [doctors, setDoctors] = useState([]);
+  const [patients, setPatients] = useState([]);
   useEffect(() => {
-    axios.get(`${BACKEND_URL}/doctor/list`).then((res) => {
-      setDoctors(res.data.doctors);
+    AugmentedAxios.get(`${BACKEND_URL}/stay/getalladmitted`).then((res) => {
+      setPatients(res.data.patients);
     });
   }, []);
 
   return (
     <>
-      <h1 className="text-center">List of All Admitted Patients</h1>
-      <DoctorTable doctorList={doctors} />
+      <h1 className="text-center">List of All Patients</h1>
+      <AdmittedPatientTable patientList={patients} />
     </>
   );
 };

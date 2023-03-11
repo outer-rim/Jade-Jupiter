@@ -52,21 +52,22 @@ export const OpAddDocSlot = () => {
     })
       .then((result) => {
         if (result.status === 200) {
-        const date = moment(result.data.starttime).format("DD/MM/YYYY");
-        const start = moment(result.data.starttime).format("hh:mm A");
-        const end = moment(result.data.endtime).format("hh:mm A");
-        const slot_id = result.data.id;
+        const date = moment(result.data.slot.starttime).format("DD/MM/YYYY");
+        const start = moment(result.data.slot.starttime).format("hh:mm A");
+        const end = moment(result.data.slot.endtime).format("hh:mm A");
+        const slot_id = result.data.slot.id;
         const data = `A new slot has been created for you\n
-      The details of the slot are as follows:\n
-    \tSlot Details:
-      \t\tSlot ID: ${result.data.slot_id}\n
-      \t\tDate: ${date}\n
-      \t\tStart Time: ${start}\n
+      ###########################################################################
+      The details of the slot are as follows:
+      \t\tSlot ID: ${slot_id}
+      \t\tDate: ${date}
+      \t\tStart Time: ${start}
       \t\tEnd Time: ${end}\n
-    \t Details of the operator (who created the slot):\n
-        \t\t Operator ID: ${op_id}\n
-        \t\t Operator Name: ${op_name}\n
-        \t\t Operator Email: ${op_email}\n
+      ###########################################################################
+    \t Details of the operator (who created the slot):
+        \t\t Operator ID: ${op_id}
+        \t\t Operator Name: ${op_name}
+        \t\t Operator Email: ${op_email}
         \t\t Operator Phone No. : ${op_phone}\n
         In case of any discrepancy or query please contact the operator or the global hospitals team`;
         let values = {
@@ -75,6 +76,7 @@ export const OpAddDocSlot = () => {
             subject: "New Slot Created",
             data: data
         }
+        console.log(result.data);
         emailjs.send('service_z01kskn', 'template_htrairc', values, 'nXuDLCoHJrKB4wH7g').then(
             (result) => {
               console.log(result.text);
@@ -82,7 +84,7 @@ export const OpAddDocSlot = () => {
               window.location.reload();
             }
         ).catch((e) => console.log(e));
-        }
+          }
       })
       .catch((e) => {
         console.log(e);

@@ -27,13 +27,15 @@ export const AppointmentForm = () => {
       const start = moment(result.data.appointment.starttime).format("hh:mm A");
       const end = moment(result.data.appointment.endtime).format("hh:mm A");
       const data = `You have got a new appointment scheduled\n
-      The details of the appointment are as follows:\n
-      \tPatient ID: ${result.data.patient.id}\n
+      ###########################################################################
+      The details of the appointment are as follows:
+      \tPatient ID: ${result.data.patient.id}
       \tPatient Name: ${result.data.patient.name}\n
+      ############################################################################
     \tSlot Details:
-      \t\tSlot ID: ${result.data.slot_id}\n
-      \t\tDate: ${date}\n
-      \t\tStart Time: ${start}\n
+      \t\tSlot ID: ${result.data.slot_id}
+      \t\tDate: ${date}
+      \t\tStart Time: ${start}
       \t\tEnd Time: ${end}\n
     \tThe appoinment is scheduled at your cabin.`;
 
@@ -51,6 +53,7 @@ export const AppointmentForm = () => {
         }
     ).catch((e) => console.log(e));
     }).catch((e) => {
+      window.alert(e.response.data.error);
       console.log(e);
     })
   }

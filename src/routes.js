@@ -15,11 +15,11 @@ export const Routes = {
     path4: "/dashboard2/overview",
   },
   Transactions: { path: "/dashboard/patient_discharge" },
-  AdmittedPatients : { path: "/dashboard/patient_admitted" },
+  AdmPatients : { path: "/dashboard/patient_admitted", path2: "/dashboard2/patient_admitted" },
   Settings: { path: "/dashboard/patient_info" },
   FDAdmit: { path: "/dashboard/admit_patient" },
   FDAppoint: { path: "/dashboard/appoint_patient" },
-  Patients: {path: "/dashboard2/patientlist"},
+  Patients: {path: "/dashboard/patientlist", path2: "/dashboard2/patientlist"},
   Doctors: {
     path: "/dashboard/doctor_list",
     path2: "/dashboardadmin/doctor_list",

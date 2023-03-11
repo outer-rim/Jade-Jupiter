@@ -82,8 +82,8 @@ export const ProfileCardWidget = (props) => {
       />
       <Card.Body className="pb-5">
         <Card.Img
-          src="http://www.iitkgp.ac.in/files/director2020.jpg"
-          alt="Diro"
+          src="https://www.pngmart.com/files/21/Admin-Profile-Vector-PNG-Clipart.png"
+          alt="profile pic"
           className="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4"
         />
         <Card.Title>{props.profile.name}</Card.Title>
@@ -209,21 +209,23 @@ const ValueChange = ({ value, suffix }) => {
 
 export const PatientTableForDoc = (props) => {
   const TableRow = (props) => {
+    const date = moment(props.date).format("DD/MM/YYYY");
     return (
       <tr>
         <td className="border-0">
           <div>
-            <span className="h6">{props.id}</span>
+            <span className="h6 text-center">{props.patient_id}</span>
           </div>
         </td>
         <td className="fw-bold border-0">{props.name}</td>
         <td className="border-0">
           <div>
-            <span className="h6">{props.id}</span>
+            <span className="h6 text-center">{props.id}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{props.id}</td>
-        <td className="fw-bold border-0">{props.id}</td>
+        <td className="fw-bold border-0">{props.illness_details}</td>
+        <td className="fw-bold border-0">{props.procedure_name}</td>
+        <td className="fw-bold border-0">{date}</td>
       </tr>
     );
   };
@@ -233,7 +235,7 @@ export const PatientTableForDoc = (props) => {
     <Card
       border="light"
       className="shadow-sm"
-      style={{ overflowY: "scroll", height: "60vh" }}
+      style={{ overflowY: "scroll", height: "50vh" }}
     >
       <br />
       <h5 className="text-center"> Patients List </h5>
@@ -245,6 +247,7 @@ export const PatientTableForDoc = (props) => {
               <th className="border-0">Patient Name</th>
               <th className="border-0">Treatment ID</th>
               <th className="border-0">Illness Details</th>
+              <th className="border-0">Procedure Name</th>
               <th className="border-0">Treatment Date</th>
             </tr>
           </thead>
@@ -261,32 +264,25 @@ export const PatientTableForDoc = (props) => {
 
 export const PatientTableForAppointDoc = (props) => {
   const TableRow = (props) => {
-    const {
-      country,
-      countryImage,
-      overallRank,
-      overallRankChange,
-      travelRank,
-      travelRankChange,
-      widgetsRank,
-      widgetsRankChange,
-    } = props;
-
+    const date = moment(props.starttime).format("DD/MM/YYYY");
+    const start = moment(props.starttime).format("hh:mm A");
+    const end = moment(props.endtime).format("hh:mm A");
+    const edate = moment(props.endtime).format("DD/MM/YYYY");
     return (
       <tr>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6 ">{props.patient_id}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{props.name}</td>
         <td className="border-0">
           <div>
-            <span className="h6">{country}</span>
+            <span className="h6">{props.id}</span>
           </div>
         </td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
-        <td className="fw-bold border-0">{overallRank ? overallRank : "-"}</td>
+        <td className="fw-bold border-0">{date}, {start}</td>
+        <td className="fw-bold border-0">{edate}, {end}</td>
       </tr>
     );
   };
@@ -297,7 +293,7 @@ export const PatientTableForAppointDoc = (props) => {
     <Card
       border="light"
       className="shadow-sm"
-      style={{ overflowY: "scroll", height: "60vh" }}
+      style={{ overflowY: "scroll", height: "50vh" }}
     >
       <br />
       <h5 className="text-center"> Patients List </h5>
@@ -308,12 +304,12 @@ export const PatientTableForAppointDoc = (props) => {
               <th className="border-0">Patient ID</th>
               <th className="border-0">Patient Name</th>
               <th className="border-0">Appointment ID</th>
-              <th className="border-0">Room Number</th>
-              <th className="border-0">Appointment Date</th>
+              <th className="border-0">Start Time</th>
+              <th className="border-0">End Time</th>
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map((r) => (
+            {appointments.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>
@@ -389,6 +385,7 @@ export const PatientTable = (props) => {
         <td className="fw-bold border-0">{props.gender}</td>
         <td className="fw-bold border-0">{props.age}</td>
         <td className="fw-bold border-0">{props.phone}</td>
+        <td className="fw-bold border-0">{props.address}</td>
       </tr>
     );
   };
@@ -410,6 +407,7 @@ export const PatientTable = (props) => {
               <th className="border-0">Gender</th>
               <th className="border-0">Age</th>
               <th className="border-0">Phone</th>
+              <th className="border-0">Address</th>
             </tr>
           </thead>
           <tbody>
@@ -424,8 +422,12 @@ export const PatientTable = (props) => {
 };
 
 export const AdmittedPatientTable = (props) => {
-  const { AllAdmittedPatientList } = props;
+  const { patientList } = props;
   const TableRow = (props) => {
+    const date = moment(props.starttime).format("DD/MM/YYYY");
+    const start = moment(props.starttime).format("hh:mm A");
+    const end = moment(props.endtime).format("hh:mm A");
+    const edate = moment(props.endtime).format("DD/MM/YYYY");
     return (
       <tr>
         <td className="border-0">
@@ -434,8 +436,12 @@ export const AdmittedPatientTable = (props) => {
           </div>
         </td>
         <td className="fw-bold border-0">{props.name}</td>
-        <td className="fw-bold border-0">{props.dname}</td>
-        <td className="fw-bold border-0">{props.date}</td>
+        <td className="fw-bold border-0">{props.gender}</td>
+        <td className="fw-bold border-0">{props.age}</td>
+        <td className="fw-bold border-0">{props.phone}</td>
+        <td className="fw-bold border-0">{date}, {start}</td>
+        <td className="fw-bold border-0">{props.endtime ? <span>{edate}, {end}</span> : <span style = {{color: "green"}}>Not Yet Discharged</span> }</td>
+        <td className="fw-bold border-0 text-center">{props.room}</td>
       </tr>
     );
   };
@@ -444,22 +450,26 @@ export const AdmittedPatientTable = (props) => {
     <Card
       border="light"
       className="shadow-sm"
-      style={{ overflowY: "scroll", height: "42.5vh" }}
+      style={{ overflowY: "scroll", height: "85vh" }}
     >
       <br />
-      <h5 className="text-center"> Admitted Patients List </h5>
+      <h5 className="text-center"> Patients List </h5>
       <Card.Body className="pb-0">
         <Table responsive className="table-centered table-nowrap rounded mb-0">
           <thead className="thead-light">
             <tr>
-              <th className="border-0">Patient ID</th>
-              <th className="border-0">Patient Name</th>
-              <th className="border-0">Doctor Name</th>
-              <th className="border-0">Admitted Date</th>
+              <th className="border-0"> ID</th>
+              <th className="border-0"> Name</th>
+              <th className="border-0"> Gender</th>
+              <th className="border-0"> Age</th>
+              <th className="border-0"> Phone</th>
+              <th className="border-0">Admission Date</th>
+              <th className="border-0">Discharge Date</th>
+              <th className="border-0">Room Number</th>
             </tr>
           </thead>
           <tbody>
-            {AllAdmittedPatientList.map((r) => (
+            {patientList.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>
