@@ -6,6 +6,7 @@ import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Card, Form, Button, InputGroup } from '@themesberg/react-bootstrap';
 import AugmentedAxios from "../utils/augmentedAxios";
 import { BACKEND_URL } from "../constants";
+import emailjs from "@emailjs/browser";
 
 
 export const AppointmentForm = () => {
@@ -21,8 +22,34 @@ export const AppointmentForm = () => {
       doctor_id:doctorId,
       slot_id:slotId
     }).then((result) => {
-      window.alert("Appointment Set Successfully");
-      window.location.reload();
+      console.log(result);
+      const date = moment(result.data.appointment.starttime).format("DD/MM/YYYY");
+      const start = moment(result.data.appointment.starttime).format("hh:mm A");
+      const end = moment(result.data.appointment.endtime).format("hh:mm A");
+      const data = `You have got a new appointment scheduled\n
+      The details of the appointment are as follows:\n
+      \tPatient ID: ${result.data.patient.id}\n
+      \tPatient Name: ${result.data.patient.name}\n
+    \tSlot Details:
+      \t\tSlot ID: ${result.data.slot_id}
+      \t\tDate: ${date}
+      \t\tStart Time: ${start}
+      \t\tEnd Time: ${end}
+    \tThe appoinment is scheduled at your cabin.`;
+
+      var values = {
+        doc_email:result.data.doctor.email,
+        to_name: result.data.doctor.name,
+        subject: "New Appointment Booked",
+        data: data
+      };
+      emailjs.send('service_z01kskn', 'template_htrairc', values, 'nXuDLCoHJrKB4wH7g').then(
+        (result) => {
+          console.log(result.text);
+          window.alert("Appointment Booked Successfully");
+          window.location.reload();
+        }
+    ).catch((e) => console.log(e));
     }).catch((e) => {
       console.log(e);
     })

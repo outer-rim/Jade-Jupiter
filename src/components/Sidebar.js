@@ -196,6 +196,7 @@ export default (props = {}) => {
               <NavItem title="Patient Discharge" icon={faChartPie} link={Routes.Transactions.path} />
               <NavItem title="Patient Info" icon={faChartPie} link={Routes.Settings.path} />
               <NavItem title="Patient Admission" icon={faChartPie} link={Routes.FDAdmit.path} />
+              <NavItem title="Admitted Patients List" icon={faChartPie} link={Routes.AdmittedPatients.path} />
               <NavItem title="Manage Appointments" icon={faChartPie} link={Routes.FDAppoint.path} />
               <NavItem title="Doctors List" icon={faChartPie} link={Routes.Doctors.path} />
 

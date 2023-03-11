@@ -18,6 +18,7 @@ import Lock from "./examples/Lock";
 import NotFoundPage from "./examples/NotFound";
 import ServerError from "./examples/ServerError";
 import FDAppoint from "./FDAppoint";
+import AdmPatients from "./AdmPatients";
 import Doctors from "./Doctors";
 import Doc_Patient_List from "./Doc_Patient_List";
 import Sidebar_admin from "../components/Sidebar_admin";

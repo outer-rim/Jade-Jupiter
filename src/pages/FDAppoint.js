@@ -13,6 +13,7 @@ import { BACKEND_URL } from "../constants.js";
 import axios from "axios";
 import AugmentedAxios from "../utils/augmentedAxios";
 import { useState, useEffect } from "react";
+import { OpAddDocSlot } from "../components/Op_add_docslot";
 
 export default () => {
   const [slot, setSlot] = useState([]);
@@ -32,16 +33,18 @@ export default () => {
       <h1 className="text-center">Manage Appointments</h1>
       <Row>
         <Col xs={12} xl={6}>
-          <DocQueForm />
+          <OpAddDocSlot slot={slot} />
         </Col>
         <Col xs={12} xl={6}>
           <AppointmentForm />
         </Col>
       </Row>
       <Row>
-        <Col xs={12} xl={1}></Col>
-        <Col xs={12} xl={10}>
+        <Col xs={12} xl={8}>
           <SlotTable slot={slot} />
+        </Col>
+        <Col xs={12} xl={4}>
+          <DocQueForm />
         </Col>
         <br />
       </Row>

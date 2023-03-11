@@ -292,7 +292,6 @@ export const PatientTableForAppointDoc = (props) => {
   };
 
   const { appointments } = props;
-  console.log(appointments);
 
   return (
     <Card
@@ -415,6 +414,52 @@ export const PatientTable = (props) => {
           </thead>
           <tbody>
             {AllPatientList.map((r) => (
+              <TableRow key={`ranking-${r.id}`} {...r} />
+            ))}
+          </tbody>
+        </Table>
+      </Card.Body>
+    </Card>
+  );
+};
+
+export const AdmittedPatientTable = (props) => {
+  const { AllAdmittedPatientList } = props;
+  const TableRow = (props) => {
+    return (
+      <tr>
+        <td className="border-0">
+          <div>
+            <span className="h6">{props.id}</span>
+          </div>
+        </td>
+        <td className="fw-bold border-0">{props.name}</td>
+        <td className="fw-bold border-0">{props.dname}</td>
+        <td className="fw-bold border-0">{props.date}</td>
+      </tr>
+    );
+  };
+
+  return (
+    <Card
+      border="light"
+      className="shadow-sm"
+      style={{ overflowY: "scroll", height: "42.5vh" }}
+    >
+      <br />
+      <h5 className="text-center"> Admitted Patients List </h5>
+      <Card.Body className="pb-0">
+        <Table responsive className="table-centered table-nowrap rounded mb-0">
+          <thead className="thead-light">
+            <tr>
+              <th className="border-0">Patient ID</th>
+              <th className="border-0">Patient Name</th>
+              <th className="border-0">Doctor Name</th>
+              <th className="border-0">Admitted Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {AllAdmittedPatientList.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>
