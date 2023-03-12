@@ -36,6 +36,7 @@ export const OpsignUp = (props) => {
       .then((response) => {
         if (response.status === 200) {
           window.alert("Operator Registered Successfully");
+          window.location.reload();
         }
       })
       .catch((e) => {
