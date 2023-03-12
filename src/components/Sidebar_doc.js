@@ -225,6 +225,7 @@ export default (props = {}) => {
                 icon={faCog}
                 link={Routes.PatientShow.path2}
               />
+              <NavItem title="On Treatment" icon={faChartPie} link={Routes.AdmPatients.path3} />
               <NavItem
                 title="Show Medicines"
                 icon={faCog}

@@ -87,7 +87,7 @@ export const ProfileCardWidget = (props) => {
           className="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4"
         />
         <Card.Title>{props.profile.name}</Card.Title>
-        <Card.Text className="text-gray mb-4">{props.role}</Card.Text>
+        <Card.Text className="text-gray mb-4">{props.role.slice(1, props.role.length-1)}</Card.Text>
       </Card.Body>
     </Card>
   );
@@ -226,6 +226,7 @@ export const PatientTableForDoc = (props) => {
         <td className="fw-bold border-0">{props.illness_details}</td>
         <td className="fw-bold border-0">{props.procedure_name}</td>
         <td className="fw-bold border-0">{date}</td>
+        <td className="fw-bold border-0">{props.room}</td>
       </tr>
     );
   };
@@ -249,6 +250,7 @@ export const PatientTableForDoc = (props) => {
               <th className="border-0">Illness Details</th>
               <th className="border-0">Procedure Name</th>
               <th className="border-0">Treatment Date</th>
+              <th className="border-0">Room Number</th>
             </tr>
           </thead>
           <tbody>
@@ -321,7 +323,6 @@ export const PatientTableForAppointDoc = (props) => {
 
 export const MedicationList = (props) => {
   const { AllMedicationList } = props;
-  console.log(AllMedicationList);
   const TableRow = (props) => {
     return (
       <tr>
@@ -362,6 +363,55 @@ export const MedicationList = (props) => {
           </thead>
           <tbody>
             {AllMedicationList.map((r) => (
+              <TableRow key={`ranking-${r.id}`} {...r} />
+            ))}
+          </tbody>
+        </Table>
+      </Card.Body>
+    </Card>
+  );
+};
+
+export const PatientMedicationList = (props) => {
+  const { PatientMedicationList } = props;
+  const TableRow = (props) => {
+    return (
+      <tr>
+        <td className="border-0">
+          <div>
+            <span className="h6">{props.id}</span>
+          </div>
+        </td>
+        <td className="fw-bold border-0">{props.name}</td>
+        <td className="fw-bold border-0">{props.brand}</td>
+        <td className="border-0">
+          <div>
+            <span className="h6">{props.dose_amount}</span>
+          </div>
+        </td>
+      </tr>
+    );
+  };
+
+  return (
+    <Card
+      border="light"
+      className="shadow-sm"
+      style={{ overflowY: "scroll", height: "40vh" }}
+    >
+      <br />
+      <Card.Body className="pb-0">
+        <Table responsive className="table-centered table-nowrap rounded mb-0">
+          <thead className="thead-light">
+            <tr>
+              <th className="border-0">Medication ID</th>
+              <th className="border-0">Medication Name</th>
+              <th className="border-0">Medication Brand</th>
+              <th className="border-0">Dose Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {PatientMedicationList.map((r) => (
               <TableRow key={`ranking-${r.id}`} {...r} />
             ))}
           </tbody>
@@ -436,12 +486,10 @@ export const AdmittedPatientTable = (props) => {
           </div>
         </td>
         <td className="fw-bold border-0">{props.name}</td>
-        <td className="fw-bold border-0">{props.gender}</td>
-        <td className="fw-bold border-0">{props.age}</td>
-        <td className="fw-bold border-0">{props.phone}</td>
         <td className="fw-bold border-0">{date}, {start}</td>
         <td className="fw-bold border-0">{props.endtime ? <span>{edate}, {end}</span> : <span style = {{color: "green"}}>Not Yet Discharged</span> }</td>
-        <td className="fw-bold border-0 text-center">{props.room}</td>
+        <td className="fw-bold border-0">{props.stay_id}</td>
+        <td className="fw-bold border-0">{props.room}</td>
       </tr>
     );
   };
@@ -460,11 +508,9 @@ export const AdmittedPatientTable = (props) => {
             <tr>
               <th className="border-0"> ID</th>
               <th className="border-0"> Name</th>
-              <th className="border-0"> Gender</th>
-              <th className="border-0"> Age</th>
-              <th className="border-0"> Phone</th>
               <th className="border-0">Admission Date</th>
               <th className="border-0">Discharge Date</th>
+              <th className="border-0">Stay ID</th>
               <th className="border-0">Room Number</th>
             </tr>
           </thead>

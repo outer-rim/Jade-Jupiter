@@ -4,16 +4,31 @@ import Datetime from "react-datetime";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Card, Form, Button, InputGroup } from '@themesberg/react-bootstrap';
-
+import AugmentedAxios from "../utils/augmentedAxios";
+import { BACKEND_URL } from "../constants";
 
 export default () => {
-  const [birthday, setBirthday] = useState("");
-  const [name, setName] = useState("");
-  console.log(name);
-
+  const [name, setName] = useState(0);
+  const [mid, setMid] = useState(0);
+  const [dose, setDose] = useState(0);
+  const [tid, setTid] = useState(0);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("I am called");
+    AugmentedAxios.post(`${BACKEND_URL}/dose/create`, {
+    medication_id: mid,
+    dose_amount: dose,
+    treatment_id: tid,
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          window.alert("Dose for Patient Added Successfully");
+          window.location.reload();
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   return (
@@ -34,19 +49,19 @@ export default () => {
             <Col md={4} className="mb-3">
               <Form.Group id="mid">
                 <Form.Label>Medication ID</Form.Label>
-                <Form.Control required type="number" placeholder="35" />
+                <Form.Control required type="number" placeholder="35" onChange={(e) => setMid(e.target.value)}/>
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">
               <Form.Group id="dosage">
                 <Form.Label>Dosage</Form.Label>
-                <Form.Control required type="text" placeholder="6mg" />
+                <Form.Control required type="number" placeholder="6" onChange={(e) => setDose(e.target.value)}/>
               </Form.Group>
             </Col>
             <Col md={4} className="mb-3">
               <Form.Group id="tid">
                 <Form.Label>Treatment ID</Form.Label>
-                <Form.Control required type="number" placeholder="35" />
+                <Form.Control required type="number" placeholder="35" onChange={(e) => setTid(e.target.value)}/>
               </Form.Group>
             </Col>
           </Row>

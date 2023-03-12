@@ -15,7 +15,7 @@ export const Routes = {
     path4: "/dashboard2/overview",
   },
   Transactions: { path: "/dashboard/patient_discharge" },
-  AdmPatients : { path: "/dashboard/patient_admitted", path2: "/dashboard2/patient_admitted" },
+  AdmPatients : { path: "/dashboard/patient_admitted", path2: "/dashboard2/patient_admitted",path3: "/dashboarddoctor/patient_admitted" },
   Settings: { path: "/dashboard/patient_info" },
   FDAdmit: { path: "/dashboard/admit_patient" },
   FDAppoint: { path: "/dashboard/appoint_patient" },

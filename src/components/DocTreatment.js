@@ -4,17 +4,43 @@ import Datetime from "react-datetime";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Card, Form, Button, InputGroup } from '@themesberg/react-bootstrap';
+import { BACKEND_URL } from "../constants";
+import AugmentedAxios from "../utils/augmentedAxios";
 
 
 export default () => {
-  const [birthday, setBirthday] = useState("");
+  const [id, setId] = useState(0);
   const [name, setName] = useState("");
-  console.log(name);
+  const [illness, setIllness] = useState("");
+  const [tid, setTid] = useState(0);
+  const [pid, setPid] = useState(0);
+  const [sid, setSid] = useState(0);
+  const [date, setDate] = useState("");
+  const [url, setUrl] = useState("");
+  const did = JSON.parse(localStorage.getItem("profile")).id;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("I am called");
-  }
+    AugmentedAxios.post(`${BACKEND_URL}/treatment/create`, {
+    patient_id: id,
+    doctor_id: did,
+    file_url: url,
+    illness_details: illness,
+    test_id: tid,
+    procedure_id: pid,
+    stay_id: sid,
+    date: date,
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          window.alert("Treatment for Patient Added Successfully");
+          window.location.reload();
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    }
 
   return (
     <Card border="light" className="bg-white shadow-sm mb-4">
@@ -32,7 +58,7 @@ export default () => {
             <Col md={4} className="mb-3">
               <Form.Group id="pid">
                 <Form.Label>Patient ID</Form.Label>
-                <Form.Control required type="number" placeholder="35" />
+                <Form.Control required type="number" placeholder="35" onChange={(e) => setId(e.target.value)}/>
               </Form.Group>
             </Col>
           </Row>
@@ -40,7 +66,7 @@ export default () => {
             <Col sm={9} className="mb-3">
               <Form.Group id="illness">
                 <Form.Label>Illness Details</Form.Label>
-                <Form.Control as = "textarea" required type="text" placeholder="Enter the illness details" />
+                <Form.Control as = "textarea" required type="text" placeholder="Enter the illness details" onChange={(e) => setIllness(e.target.value)}/>
               </Form.Group>
             </Col>
           </Row>
@@ -48,19 +74,19 @@ export default () => {
             <Col md={3} className="mb-3">
               <Form.Group id="tid">
                 <Form.Label>Test ID</Form.Label>
-                <Form.Control required type="number" placeholder="35" onChange={(e) => setName(e.target.value)} />
+                <Form.Control required type="number" placeholder="35" onChange={(e) => setTid(e.target.value)} />
               </Form.Group>
             </Col>
             <Col md={3} className="mb-3">
               <Form.Group id="prid">
                 <Form.Label>Procedure ID</Form.Label>
-                <Form.Control required type="number" placeholder="35" onChange={(e) => setName(e.target.value)} />
+                <Form.Control required type="number" placeholder="35" onChange={(e) => setPid(e.target.value)} />
               </Form.Group>
             </Col>
             <Col md={3} className="mb-3">
               <Form.Group id="sid">
                 <Form.Label>Stay ID</Form.Label>
-                <Form.Control required type="number" placeholder="35" onChange={(e) => setName(e.target.value)} />
+                <Form.Control required type="number" placeholder="35" onChange={(e) => setSid(e.target.value)} />
               </Form.Group>
             </Col>
             <Col md={3} className="mb-3">
@@ -68,14 +94,14 @@ export default () => {
                 <Form.Label>Date</Form.Label>
                 <Datetime
                   timeFormat={false}
-                  onChange={(e) => setBirthday(e._d)}
+                  onChange={(e) => setDate(e._d)}
                   renderInput={(props, openCalendar) => (
                     <InputGroup>
                       <InputGroup.Text><FontAwesomeIcon icon={faCalendarAlt} /></InputGroup.Text>
                       <Form.Control
                         required
                         type="text"
-                        value={birthday ? moment(birthday).format("DD/MM/YYYY") : ""}
+                        value={date ? moment(date).format("DD/MM/YYYY") : ""}
                         placeholder="dd/mm/yyyy"
                         onFocus={openCalendar}
                         onChange={() => { }} />
@@ -88,7 +114,7 @@ export default () => {
             <Col md={12} className="mb-3">
               <Form.Group id="fileURL">
                 <Form.Label>Add File URL</Form.Label>
-                <Form.Control required type="text" placeholder="Enter file URL" onChange={(e) => setName(e.target.value)} />
+                <Form.Control required type="text" placeholder="Enter file URL" onChange={(e) => setUrl(e.target.value)} />
               </Form.Group>
             </Col>
           </Row>

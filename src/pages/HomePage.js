@@ -430,6 +430,7 @@ export default () => (
       path={Routes.DocTreatment.path}
       component={DocTreatment}
     />
+    <RouteWithSidebarDoc exact path={Routes.AdmPatients.path3} component={AdmPatients} />
 
     {/* components */}
     <RouteWithSidebar
