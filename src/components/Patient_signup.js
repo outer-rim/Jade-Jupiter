@@ -92,8 +92,7 @@ export const GeneralInfoForm = () => {
             </Col>
           </Row>
           <div className="mt-3">
-            <span><Button variant="primary" type="submit" onClick = {handleSubmit}>Register</Button> &nbsp; &nbsp;
-            <Button variant="primary" type="submit" onClick = {handleUpdate}>Update</Button>
+            <span><Button variant="primary" type="submit" onClick = {handleSubmit}>Register</Button>
             </span>
           </div>
         </Form>

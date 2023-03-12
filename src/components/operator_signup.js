@@ -145,10 +145,6 @@ export const OpsignUp = (props) => {
             <span>
               <Button variant="primary" type="submit" onClick={handleRegister}>
                 Register
-              </Button>{" "}
-              &nbsp; &nbsp;
-              <Button variant="primary" type="submit" onClick={handleSubmit}>
-                Update
               </Button>
             </span>
           </div>

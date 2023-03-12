@@ -23,6 +23,7 @@ export default () => {
       if(result.status === 200)
       {
         window.alert("Operator Deleted Successfully");
+        window.location.reload();
       }
     }).catch((e) => {
       if(e.response.status === 404)
@@ -40,6 +41,7 @@ export default () => {
       if(result.status === 200)
       {
         window.alert("Doctor Deleted Successfully");
+        window.location.reload();
       }
     }).catch((e) => {
       if(e.response.status === 404)

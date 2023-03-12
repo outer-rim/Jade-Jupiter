@@ -35,7 +35,6 @@ import axios from "axios";
 const DoctorCards = (props) => {
     const imgurl = [
         'https://media.istockphoto.com/id/177373093/photo/indian-male-doctor.jpg?s=612x612&w=0&k=20&c=5FkfKdCYERkAg65cQtdqeO_D0JMv6vrEdPw3mX1Lkfg=',
-        'https://www.kauveryhospital.com/doctorimage/recent/salem/Dr_P_V_Dhanapal.jpg',
         'https://www.woodlandshospital.in/images/doctor-img/ravi-kant-saraogi.jpg',
         'https://www.practostatic.com/practo-care/doctor_home.png',
         'https://www.felixhospital.com/sites/default/files/2022-11/dr-dk-gupta.jpg',

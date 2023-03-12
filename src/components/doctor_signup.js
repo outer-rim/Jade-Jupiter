@@ -48,11 +48,6 @@ export const DocsignUp = (props) => {
       });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("I am called");
-  };
-
   return (
     <Card border="light" className="bg-white shadow-sm mb-4">
       <Card.Body>
@@ -131,7 +126,7 @@ export const DocsignUp = (props) => {
                 <Form.Control
                   required
                   type="text"
-                  defaultValue={props.doctor.licence}
+                  defaultValue={props.doctor.license}
                   onChange={(e) => setLicence(e.target.value)}
                 />
               </Form.Group>
@@ -180,10 +175,6 @@ export const DocsignUp = (props) => {
             <span>
               <Button variant="primary" type="submit" onClick={handleRegister}>
                 Register
-              </Button>{" "}
-              &nbsp; &nbsp;
-              <Button variant="primary" type="submit" onClick={handleSubmit}>
-                Update
               </Button>
             </span>
           </div>

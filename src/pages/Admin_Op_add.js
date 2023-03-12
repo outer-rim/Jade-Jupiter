@@ -59,7 +59,7 @@ export default () => {
       <h1 className="text-center">Operator Registration</h1>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <Form className="navbar-search">
-          <h6>Enter Operator ID of Operator to be updated</h6>
+          <h6>Enter Operator ID of Operator to be searched</h6>
           <Form.Group id="topbarSearch">
             <InputGroup className="input-group-merge">
               <InputGroup.Text>
