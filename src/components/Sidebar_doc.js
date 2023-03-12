@@ -231,6 +231,7 @@ export default (props = {}) => {
                 icon={faCog}
                 link={Routes.MedicineShow.path}
               />
+              <NavItem title="All Tests List" icon={faChartPie} link={Routes.Tests.path2} />
               <Button
                 as={Link}
                 onClick={handleSignOut}

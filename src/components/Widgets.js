@@ -321,6 +321,61 @@ export const PatientTableForAppointDoc = (props) => {
   );
 };
 
+export const AllTests = (props) => {
+  const { tests } = props
+  const TableRow = (props) => {
+    const date = moment(props.date).format("DD/MM/YYYY");
+    return (
+      <tr>
+        <td className="border-0">
+          <div>
+            <span className="h6 ">{props.tid}</span>
+          </div>
+        </td>
+        <td className="fw-bold border-0">{props.name}</td>
+        <td className="border-0">
+          <div>
+            <span className="h6">{props.appointment_id}</span>
+          </div>
+        </td>
+        <td className="fw-bold border-0">{props.pid}</td>
+        <td className="fw-bold border-0">{props.doctor_id}</td>
+        <td className="fw-bold border-0">{date}</td>
+      </tr>
+    );
+  };
+
+  return (
+    <Card
+      border="light"
+      className="shadow-sm"
+      style={{ overflowY: "scroll", height: "80vh" }}
+    >
+      <br />
+      <h5 className="text-center"> Patients List </h5>
+      <Card.Body className="pb-0">
+        <Table responsive className="table-centered table-nowrap rounded mb-0">
+          <thead className="thead-light">
+            <tr>
+              <th className="border-0">Test ID</th>
+              <th className="border-0">Test Name</th>
+              <th className="border-0">Appointment ID</th>
+              <th className="border-0">Patient ID</th>
+              <th className="border-0">Doctor ID</th>
+              <th className="border-0">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tests.map((r) => (
+              <TableRow key={`ranking-${r.id}`} {...r} />
+            ))}
+          </tbody>
+        </Table>
+      </Card.Body>
+    </Card>
+  );
+};
+
 export const MedicationList = (props) => {
   const { AllMedicationList } = props;
   const TableRow = (props) => {

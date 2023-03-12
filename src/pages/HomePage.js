@@ -83,6 +83,7 @@ import patients from "./patients";
 import medicines from "./medicines";
 import invoicePdf from "../components/invoicePdf.js";
 import invoiceHandler from "./invoiceHandler";
+import ViewTests from "./ViewTests";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -351,6 +352,11 @@ export default () => (
       component={PDose}
     />
     <RouteWithSidebarData
+    exact
+    path={Routes.Tests.path}
+    component = {ViewTests}
+    />
+    <RouteWithSidebarData
       exact
       path={Routes.MedicineShow.path2}
       component={medicines}
@@ -420,6 +426,12 @@ export default () => (
       path={Routes.MedicineShow.path}
       component={medicines}
     />
+    <RouteWithSidebarDoc
+    exact
+    path={Routes.Tests.path2}
+    component = {ViewTests}
+    />
+
     <RouteWithSidebarDoc
       exact
       path={Routes.DocMedication.path}

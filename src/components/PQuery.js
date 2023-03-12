@@ -6,7 +6,7 @@ import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Card, Form, Button, InputGroup, Modal } from '@themesberg/react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import AugmentedAxios from "../utils/augmentedAxios";
-import { BACKEND_URL } from "../constants";
+import { BACKEND_URL, FILE_URL } from "../constants";
 import { PatientMedicationList } from "./Widgets";
 import './styles.css';
 
@@ -49,12 +49,12 @@ export default (props) => {
               <h6>Treatment Date: {date}</h6>
               <h6 style = {{fontSize: "18px", color: "black"}}>Illness Details: <span style = {{fontSize: "16px", color: "black"}}>{patient.illness_details}</span> </h6>
               <h6>Room Details: {patient.room}</h6>
-              <h6>Files: <a href={patient.file_url} style = {{color: "blue"}} target = "_blank"><u>Treatment File</u></a></h6>
+              <h6>Files: <a href={`${FILE_URL}${patient.file_url.slice(7)}`} style = {{color: "blue"}} target = "_blank"><u>Treatment File</u></a></h6>
               <h6>Procedure Name: {patient.procedure_name}</h6>
               <hr />
               <h5 style = {{fontWeight: "bold"}}>Test Details: </h5>
               <h6>Test Name: {patient.name}</h6>
-              <h6>Test Report: <a href={patient.test_file_url} style = {{color: "blue"}} target = "_blank"><u>Test File</u></a></h6>
+              <h6>Test Report: <a href={`${FILE_URL}${patient.test_file_url.slice(7)}`} style = {{color: "blue"}} target = "_blank"><u>Test File</u></a></h6>
               <hr />
               <h5 style = {{fontWeight: "bold"}}>Medication Details: </h5>
               <Button variant="success" className="me-2" style = {{color: "white", fontSize: "14px"}} onClick = {() => handleSubmit(patient.treatment_id)}>

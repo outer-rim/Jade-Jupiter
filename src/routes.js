@@ -20,6 +20,7 @@ export const Routes = {
   FDAdmit: { path: "/dashboard/admit_patient" },
   FDAppoint: { path: "/dashboard/appoint_patient" },
   Patients: {path: "/dashboard/patientlist", path2: "/dashboard2/patientlist"},
+  Tests: {path: "/dashboard2/alltests", path2: "/dashboarddoctor/alltests"},
   Doctors: {
     path: "/dashboard/doctor_list",
     path2: "/dashboardadmin/doctor_list",

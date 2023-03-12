@@ -4,7 +4,7 @@ import AugmentedAxios from "../utils/augmentedAxios";
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import {
   Col,
   Row,
@@ -12,9 +12,12 @@ import {
   Form,
   Button,
   InputGroup,
+  Image,
 } from "@themesberg/react-bootstrap";
+import axios from "axios";
 
 export default () => {
+  const [file, setFile] = useState();
   const [id, setId] = useState(0);
   const [name, setName] = useState("");
   const [tname, setTname] = useState("");
@@ -24,27 +27,52 @@ export default () => {
   const [cost, setCost] = useState(0);
   const [date, setDate] = useState("");
   const [url, setUrl] = useState("");
+  const [file_uploaded, setFile_uploaded] = useState("");
+
+  const handleFileChange = (e) => {
+    e.preventDefault();
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+      setFile_uploaded(e.target.files[0].name);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    AugmentedAxios.post(`${BACKEND_URL}/test/create`, {
-      name: tname,
-      file_url: url,
-      appointment_id: aid,
-      report_status: stat,
-      cost: cost,
-      date: date,
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          window.alert("Test for Patient Added Successfully");
-          window.location.reload();
-        }
+    if (!file) {
+      window.alert("Please upload file!");
+      return;
+    }
+    const formData = new FormData();
+		formData.append('image', file);
+
+    AugmentedAxios.post(`${BACKEND_URL}/test/upload`, formData, { headers:{ "Content-Type": "multipart/form-data"} })
+      .then((res) => {
+        console.log(res);
+
+        AugmentedAxios.post(`${BACKEND_URL}/test/create`, {
+          name: tname,
+          file_url: res.data.file_url,
+          appointment_id: aid,
+          report_status: stat,
+          cost: cost,
+          date: date,
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              window.alert("Test for Patient Added Successfully");
+              window.location.reload();
+            }
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       })
       .catch((e) => {
+        window.alert("Error uploading file!");
         console.log(e);
       });
-  };
+  }
 
   return (
     <Card border="light" className="bg-white shadow-sm mb-4">
@@ -163,17 +191,35 @@ export default () => {
             </Col>
           </Row>
           <Row>
-            <Col md={12} className="mb-3">
-              <Form.Group id="fileURL">
-                <Form.Label>Add File URL</Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  placeholder="Enter file URL"
-                  onChange={(e) => setUrl(e.target.value)}
-                />
-              </Form.Group>
-            </Col>
+          <Col xs={12}>
+
+            <Card border="light" className="bg-white shadow-sm mb-4">
+              <Card.Body>
+                <h5 className="mb-4">Upload File</h5>
+                <div className="d-xl-flex align-items-center">
+                  <div className="user-avatar xl-avatar">
+                    <Image fluid rounded src="https://conceptdraw.com/a1717c3/p2/preview/640/pict--file-folder-office-vector-stencils-library" />
+                  </div>
+                  <div className="file-field">
+                    <div className="d-flex justify-content-xl-center ms-xl-3">
+                      <div className="d-flex">
+                        <span className="icon icon-md">
+                          <FontAwesomeIcon icon={faPaperclip} className="me-3" />
+                        </span>
+                        <input type="file" onChange={handleFileChange}/>
+                        <div className="d-md-block text-start">
+                          <div className="fw-normal text-dark mb-1">Choose File</div>
+                          <div className="text-gray small">
+                            {file_uploaded}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
           </Row>
           <div className="mt-3">
             <span>

@@ -213,7 +213,7 @@ export default (props = {}) => {
                 icon={faChartPie}
                 link={Routes.PatientDose.path}
               />
-              <Dropdown.Divider className="my-3 border-indigo" />
+              
               <NavItem
                 title="Add Procedures"
                 icon={faChartPie}
@@ -239,6 +239,7 @@ export default (props = {}) => {
 
               <NavItem title="Doctors List" icon={faChartPie} link={Routes.Doctors.path3} />
               <NavItem title="All Patients List" icon={faChartPie} link={Routes.Patients.path2} />
+              <NavItem title="All Tests List" icon={faChartPie} link={Routes.Tests.path} />
               <Button
                 as={Link}
                 onClick={handleSignOut}
