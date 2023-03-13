@@ -53,7 +53,7 @@ export const AppointmentForm = () => {
         }
     ).catch((e) => console.log(e));
     }).catch((e) => {
-      window.alert(e.response.data.error);
+      window.alert(e.response.data.message);
       console.log(e);
     })
   }

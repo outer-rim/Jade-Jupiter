@@ -59,6 +59,7 @@ export default () => {
           })
           .catch((e) => {
             console.log(e);
+            window.alert(e.response.data.message);
           });
       })
       .catch((e) => {

@@ -30,6 +30,7 @@ const handleSubmit = (e) => {
     })
     .catch((e) => {
       console.log(e);
+      window.alert(e.response.data.message);
     });
 }
 

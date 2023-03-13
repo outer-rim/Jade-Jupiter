@@ -27,11 +27,8 @@ export default () => {
         window.location.reload();
       }
     }).catch((error) => {
-      if(error.status == 404)
-      {
-        window.alert("No such Patient Found");
-      }
-      console.log(error)
+      window.alert("No such Patient Found");
+      console.log(error);
     })
   }
   return (

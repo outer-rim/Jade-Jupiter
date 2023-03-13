@@ -26,6 +26,7 @@ export const AdmitForm = () => {
       })
       .catch((error) => {
         console.log(error);
+        window.alert(error.response.data.message);
       });
   }
 
