@@ -38,7 +38,7 @@ export default () => {
       fr_email: email,
       message: message
     };
-    emailjs.send('service_z01kskn', 'template_ycr1q1t', values, 'nXuDLCoHJrKB4wH7g').then(
+    emailjs.send('', '', values, '').then( // fill the '' with appropriate credentials
       (result) => {
         console.log(result.text);
         window.alert(

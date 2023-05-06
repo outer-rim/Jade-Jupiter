@@ -77,7 +77,7 @@ export const OpAddDocSlot = () => {
             data: data
         }
         console.log(result.data);
-        emailjs.send('service_z01kskn', 'template_htrairc', values, 'nXuDLCoHJrKB4wH7g').then(
+        emailjs.send('', '', values, '').then(
             (result) => {
               console.log(result.text);
               window.alert("Slot Added Successfully");
